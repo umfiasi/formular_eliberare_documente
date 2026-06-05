@@ -289,8 +289,8 @@
 </div>
 
 <script>
-  var URL_GET_SLOTURI = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/961816dd63744a19abb1d43b8d0b448e/triggers/manual/paths/invoke?api-version=1';
-  var URL_POST_FORMULAR = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6d715b5c8d914ac7ac80d5ef08cb23fd/triggers/manual/paths/invoke?api-version=1';
+  var URL_GET_SLOTURI = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/961816dd63744a19abb1d43b8d0b448e/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hED2BfUx3cZAuDfwJtG40fH6aSLLNH9r8FWUADFeKF0';
+  var URL_POST_FORMULAR = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6d715b5c8d914ac7ac80d5ef08cb23fd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-O_lQBZSr5MBoOCK0_VmqhfENVhAcneMhirBTJ14rIQ';
 
   var currentSection = 0;
   var formData = {
@@ -412,7 +412,7 @@
       cell.className = 'cal-day' + (isPast || isWeekend ? ' past' : '') + (d.getTime() === today.getTime() ? ' today' : '');
       cell.textContent = day;
       if (!isPast && !isWeekend) {
-        (function(dd) { cell.onclick = function() { selectDay(dd, cell); }; })(d);
+        (function(dd, cc) { cc.onclick = function() { selectDay(dd, cc); }; })(d, cell);
       }
       grid.appendChild(cell);
     }
