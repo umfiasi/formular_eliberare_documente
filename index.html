@@ -450,8 +450,8 @@
       var ocupate = [];
       if (data && data.sloturi) {
         data.sloturi.forEach(function(item) {
-          if (item.OraProgramare) {
-            var dt = new Date(item.OraProgramare);
+          if (item.oraProgramare) {
+            var dt = new Date(item.oraProgramare);
             var h = dt.getUTCHours() + 3;
             if (h >= 24) h -= 24;
             var m = dt.getUTCMinutes();
