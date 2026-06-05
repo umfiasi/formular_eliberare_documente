@@ -577,7 +577,7 @@ function loadSloturi(date) {
   function selectSlot(slot, btn, date) {
     document.querySelectorAll('.slot-btn').forEach(function(b) { b.classList.remove('selected'); });
     btn.classList.add('selected');
-    formData.oraProgramare = slot;
+    formData.OraProgramare = slot;
     var info = document.getElementById('selectedInfo');
     info.textContent = 'Programare selectată: ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() + ', ora ' + slot;
     info.style.display = 'block';
@@ -599,13 +599,13 @@ function loadSloturi(date) {
   }
 
   function submitForm() {
-    if (!formData.dataProgramare || !formData.oraProgramare) return;
+    if (!formData.DataProgramare || !formData.OraProgramare) return;
     document.getElementById('btnSubmit').disabled = true;
     document.getElementById('btnSubmit').textContent = 'Se trimite...';
 
-    var dateStr = formData.dataProgramare.getFullYear() + '-' +
-      String(formData.dataProgramare.getMonth() + 1).padStart(2, '0') + '-' +
-      String(formData.dataProgramare.getDate()).padStart(2, '0');
+    var dateStr = formData.DataProgramare.getFullYear() + '-' +
+      String(formData.DataProgramare.getMonth() + 1).padStart(2, '0') + '-' +
+      String(formData.DataProgramare.getDate()).padStart(2, '0');
 
     var payload = {
       nume: formData.nume,
@@ -617,8 +617,8 @@ function loadSloturi(date) {
       rating2: formData.rating2,
       timpAsteptare: formData.timpAsteptare,
       observatii: formData.observatii,
-      dataProgramare: dateStr,
-      oraProgramare: formData.oraProgramare,
+      DataProgramare: dateStr,
+      OraProgramare: formData.OraProgramare,
       gdpr: formData.gdpr1
     };
 
@@ -636,8 +636,8 @@ function loadSloturi(date) {
     summary.innerHTML =
       '<div><span>Nume</span><span>' + formData.nume + '</span></div>' +
       '<div><span>Email</span><span>' + formData.email + '</span></div>' +
-      '<div><span>Data programării</span><span>' + formData.dataProgramare.getDate() + ' ' + months[formData.dataProgramare.getMonth()] + ' ' + formData.dataProgramare.getFullYear() + '</span></div>' +
-      '<div><span>Ora</span><span>' + formData.oraProgramare + '</span></div>';
+      '<div><span>Data programării</span><span>' + formData.DataProgramare.getDate() + ' ' + months[formData.DataProgramare.getMonth()] + ' ' + formData.DataProgramare.getFullYear() + '</span></div>' +
+      '<div><span>Ora</span><span>' + formData.OraProgramare + '</span></div>';
     document.getElementById('sec3').classList.remove('active');
     document.getElementById('secSuccess').classList.add('active');
     document.getElementById('progressFill').style.width = '100%';
