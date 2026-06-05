@@ -445,6 +445,7 @@
     })
     .then(function(r) { return r.json(); })
     .then(function(data) {
+      console.log('RASPUNS:', JSON.stringify(data));
       loading.style.display = 'none';
       var ocupate = [];
       if (data && data.sloturi) {
