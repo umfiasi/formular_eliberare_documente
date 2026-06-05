@@ -452,7 +452,7 @@
         data.sloturi.forEach(function(item) {
           if (item.OraProgramare) {
             var dt = new Date(item.OraProgramare);
-            var h = dt.getUTCHours() + 2;
+            var h = dt.getUTCHours() + 3;
             if (h >= 24) h -= 24;
             var m = dt.getUTCMinutes();
             var ora = (h < 10 ? '0' : '') + h + ':' + (m === 0 ? '00' : m);
