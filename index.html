@@ -71,6 +71,42 @@
   .slot-btn:hover:not(.taken) { border-color: var(--blue); color: var(--blue); }
   .slot-btn.selected { background: var(--blue); color: #fff; border-color: var(--blue); }
   .slot-btn.taken { background: var(--gray-100); color: var(--gray-400); cursor: not-allowed; text-decoration: line-through; }
+  .slot-btn:disabled {
+  pointer-events: none;
+}
+
+.booked-slots {
+  margin-top: 14px;
+  padding: 12px 14px;
+  background: #fff7f7;
+  border: 1px solid #f0c6c6;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--gray-700);
+  display: none;
+}
+
+.booked-slots strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--red);
+  font-weight: 500;
+}
+
+.booked-slot-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.booked-slot-pill {
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #fbe4e4;
+  color: var(--red);
+  font-size: 12px;
+  text-decoration: line-through;
+}
   .selected-info { background: var(--green-light); border: 1px solid #9fe1cb; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--green); font-weight: 500; margin-top: 16px; display: none; }
   .loading-slots { text-align: center; padding: 20px; font-size: 13px; color: var(--gray-400); display: none; }
   .btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; }
@@ -297,7 +333,7 @@
     rating1: null, rating2: null, timpAsteptare: '',
     observatii: '', nume: '', email: '', telefon: '',
     categorie: '', scop: '', gdpr1: false, gdpr2: false,
-    dataProgramare: null, oraProgramare: null
+    DataProgramare: null, OraProgramare: null
   };
 
   var calYear, calMonth;
@@ -421,52 +457,93 @@
   function selectDay(date, cell) {
     document.querySelectorAll('.cal-day').forEach(function(c) { c.classList.remove('selected'); });
     cell.classList.add('selected');
-    formData.dataProgramare = date;
-    formData.oraProgramare = null;
+    formData.DataProgramare = date;
+    formData.OraProgramare = null;
     document.getElementById('selectedInfo').style.display = 'none';
     document.getElementById('btnSubmit').disabled = true;
     loadSloturi(date);
   }
 
-  function loadSloturi(date) {
-    var section = document.getElementById('slotsSection');
-    var loading = document.getElementById('loadingSlots');
-    section.style.display = 'none';
-    loading.style.display = 'block';
+function loadSloturi(date) {
+  var section = document.getElementById('slotsSection');
+  var loading = document.getElementById('loadingSlots');
 
-    var dateStr = date.getFullYear() + '-' +
-      String(date.getMonth() + 1).padStart(2, '0') + '-' +
-      String(date.getDate()).padStart(2, '0');
+  section.style.display = 'none';
+  loading.style.display = 'block';
 
-    fetch(URL_GET_SLOTURI, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: dateStr })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      console.log('RASPUNS:', JSON.stringify(data));
-      loading.style.display = 'none';
-      var ocupate = [];
-      if (data && data.sloturi) {
-        data.sloturi.forEach(function(item) {
-          if (item.oraProgramare) {
-            var dt = new Date(item.oraProgramare);
-            var h = dt.getUTCHours() + 3;
-            if (h >= 24) h -= 24;
-            var m = dt.getUTCMinutes();
-            var ora = (h < 10 ? '0' : '') + h + ':' + (m === 0 ? '00' : m);
-            ocupate.push(ora);
-          }
-        });
+  var dateStr = date.getFullYear() + '-' +
+    String(date.getMonth() + 1).padStart(2, '0') + '-' +
+    String(date.getDate()).padStart(2, '0');
+
+  fetch(URL_GET_SLOTURI, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ data: dateStr })
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    console.log('RASPUNS:', JSON.stringify(data));
+
+    loading.style.display = 'none';
+
+    var ocupate = [];
+    var sloturi = [];
+
+    // Accepta atat array direct, cat si string JSON din Power Automate
+    if (data && Array.isArray(data.sloturi)) {
+      sloturi = data.sloturi;
+    } else if (data && typeof data.sloturi === 'string') {
+      try {
+        sloturi = JSON.parse(data.sloturi);
+      } catch (e) {
+        console.error('Eroare parsare data.sloturi:', e);
+        sloturi = [];
       }
-      renderSlots(date, ocupate);
-    })
-    .catch(function() {
-      loading.style.display = 'none';
-      renderSlots(date, []);
+    } else if (Array.isArray(data)) {
+      sloturi = data;
+    }
+
+    sloturi.forEach(function(item, index) {
+      if (item && item.OraProgramare) {
+        var dt = new Date(item.OraProgramare);
+
+        var dataConvertita = dt.toLocaleDateString('en-CA', {
+          timeZone: 'Europe/Bucharest'
+        });
+
+        var oraConvertita = dt.toLocaleTimeString('ro-RO', {
+          timeZone: 'Europe/Bucharest',
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: false
+        });
+
+        console.log('SLOT CONVERTIT #' + (index + 1), {
+          OraProgramareOriginal: item.OraProgramare,
+          dataConvertitaRomania: dataConvertita,
+          oraConvertitaRomania: oraConvertita
+        });
+
+        if (dataConvertita === dateStr) {
+          ocupate.push(oraConvertita);
+        }
+      }
     });
-  }
+
+    ocupate = ocupate.filter(function(value, index, self) {
+      return self.indexOf(value) === index;
+    });
+
+    console.log('Sloturi ocupate pentru ' + dateStr + ':', ocupate);
+
+    renderSlots(date, ocupate);
+  })
+  .catch(function(err) {
+    console.error('Eroare la incarcarea sloturilor:', err);
+    loading.style.display = 'none';
+    renderSlots(date, []);
+  });
+}
 
   function renderSlots(date, ocupate) {
     var section = document.getElementById('slotsSection');
