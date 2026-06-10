@@ -19,8 +19,10 @@
   .logo-placeholder { width: 52px; height: 52px; border: 1.5px solid rgba(185,155,100,0.5); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); text-align: center; line-height: 1.3; }
   header h1 { font-family: 'DM Serif Display', serif; font-size: 18px; font-weight: 400; color: #fff; }
   header p { font-size: 13px; color: var(--gold); margin-top: 3px; }
-  .steps { display: flex; background: var(--green-dark); overflow-x: auto; padding: 0 24px; }
-  .step-btn { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .steps { display: flex; background: var(--green-dark); overflow-x: auto; padding: 0 24px; align-items: stretch; }
+  .steps-divider { width: 1px; background: rgba(255,255,255,0.15); margin: 10px 4px; flex-shrink: 0; position: relative; }
+  .steps-divider::after { content: 'date personale'; position: absolute; top: 50%; left: 10px; transform: translateY(-50%); font-size: 10px; color: rgba(185,155,100,0.5); white-space: nowrap; letter-spacing: 0.05em; text-transform: uppercase; }
+  .step-btn { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); background: none; border: none; border-bottom: 2px solid transparent; cursor: default; white-space: nowrap; pointer-events: none; }
   .step-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 500; }
   .step-btn.done { color: rgba(185,155,100,0.7); }
   .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 500; margin-right: 8px; }
@@ -142,16 +144,21 @@
 </div>
 
 <div class="steps">
-  <button class="step-btn active" onclick="goTo(0)" id="stepBtn0"><span class="step-num">1</span>Satisfacție</button>
-  <button class="step-btn" onclick="goTo(1)" id="stepBtn1"><span class="step-num">2</span>Inserție prof.</button>
-  <button class="step-btn" onclick="goTo(2)" id="stepBtn2"><span class="step-num">3</span>GDPR</button>
-  <button class="step-btn" onclick="goTo(3)" id="stepBtn3"><span class="step-num">4</span>Programare</button>
+  <button class="step-btn active" id="stepBtn0"><span class="step-num">1</span>Satisfacție <span style="font-size:10px; opacity:0.6; margin-left:4px;">· anonim</span></button>
+  <div class="steps-divider"></div>
+  <button class="step-btn" id="stepBtn1"><span class="step-num">2</span>Inserție prof.</button>
+  <button class="step-btn" id="stepBtn2"><span class="step-num">3</span>GDPR</button>
+  <button class="step-btn" id="stepBtn3"><span class="step-num">4</span>Programare</button>
 </div>
 
 <div class="container">
 
   <!-- SECTIUNEA 1: Satisfactie educationala -->
   <div class="section active" id="sec0">
+    <div style="display:flex; align-items:center; gap:10px; background:var(--green-light); border:1px solid #9bc7c0; border-radius:8px; padding:10px 14px; margin-bottom:20px; font-size:13px; color:var(--green);">
+      <span style="font-size:18px;">🔒</span>
+      <span>Acest chestionar este <strong>anonim</strong>. Nu se colectează date personale în această secțiune.</span>
+    </div>
     <h2 class="section-title">Chestionar de satisfacție a parcursului educațional</h2>
     <p class="section-desc">Acest chestionar cuprinde întrebări care se referă la parcursul educațional din cadrul UMF „Grigore T. Popa" Iași. Formularul se completează prin bifarea cifrei corespunzătoare răspunsului ales. Toate câmpurile sunt obligatorii.</p>
 
