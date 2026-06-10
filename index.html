@@ -3,140 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formular instituție</title>
+<title>Formular UMF Iași</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap');
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --blue: #1a56db; --blue-light: #e8f0fe; --blue-dark: #1240a8;
-    --green: #0f6e56; --green-light: #e1f5ee;
+    --gold: #B99B64; --gold-light: #f5eedd; --gold-dark: #9a7f48;
+    --green: #004A41; --green-light: #e0eeec; --green-dark: #003530;
     --gray-100: #f7f7f5; --gray-200: #ebebea; --gray-400: #9b9a95;
     --gray-700: #3d3d3a; --gray-900: #1a1a18; --red: #c0392b;
     --radius: 10px;
   }
   body { font-family: 'DM Sans', sans-serif; background: var(--gray-100); color: var(--gray-900); min-height: 100vh; padding: 0 0 60px; }
-  header { background: #fff; border-bottom: 1px solid var(--gray-200); padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
-  .logo-placeholder { width: 48px; height: 48px; border: 1.5px dashed var(--gray-400); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--gray-400); text-align: center; line-height: 1.3; }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; }
-  header p { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
-  .steps { display: flex; background: #fff; border-bottom: 1px solid var(--gray-200); overflow-x: auto; padding: 0 24px; }
-  .step-btn { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--gray-400); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-  .step-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 500; }
-  .step-btn.done { color: var(--green); }
-  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--gray-200); color: var(--gray-700); font-size: 11px; font-weight: 500; margin-right: 8px; }
-  .step-btn.active .step-num { background: var(--blue); color: #fff; }
-  .step-btn.done .step-num { background: var(--green); color: #fff; }
-  .container { max-width: 680px; margin: 0 auto; padding: 32px 16px 0; }
+  header { background: var(--green); padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+  .logo-placeholder { width: 52px; height: 52px; border: 1.5px solid rgba(185,155,100,0.5); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); text-align: center; line-height: 1.3; }
+  header h1 { font-family: 'DM Serif Display', serif; font-size: 18px; font-weight: 400; color: #fff; }
+  header p { font-size: 13px; color: var(--gold); margin-top: 3px; }
+  .steps { display: flex; background: var(--green-dark); overflow-x: auto; padding: 0 24px; }
+  .step-btn { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
+  .step-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 500; }
+  .step-btn.done { color: rgba(185,155,100,0.7); }
+  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 500; margin-right: 8px; }
+  .step-btn.active .step-num { background: var(--gold); color: var(--green-dark); }
+  .step-btn.done .step-num { background: rgba(185,155,100,0.4); color: #fff; }
+  .container { max-width: 700px; margin: 0 auto; padding: 32px 16px 0; }
   .section { display: none; }
   .section.active { display: block; }
-  .section-title { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 6px; }
-  .section-desc { font-size: 14px; color: var(--gray-400); margin-bottom: 28px; }
+  .section-title { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 6px; color: var(--green); }
+  .section-desc { font-size: 14px; color: var(--gray-400); margin-bottom: 28px; line-height: 1.6; }
   .card { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; }
+  .q-label { font-size: 14px; font-weight: 500; color: var(--gray-700); margin-bottom: 14px; line-height: 1.5; }
+  .q-num { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; background: var(--green); color: #fff; border-radius: 50%; font-size: 11px; font-weight: 500; margin-right: 8px; flex-shrink: 0; }
+  .q-header { display: flex; align-items: flex-start; margin-bottom: 14px; }
+  .q-header .q-label { margin-bottom: 0; }
   .field { margin-bottom: 20px; }
   .field:last-child { margin-bottom: 0; }
   label { display: block; font-size: 13px; font-weight: 500; color: var(--gray-700); margin-bottom: 8px; }
   label .req { color: var(--red); margin-left: 2px; }
   input[type=text], input[type=email], input[type=tel], select, textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--gray-900); background: #fff; outline: none; transition: border-color 0.15s; }
-  input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,86,219,0.08); }
-  textarea { resize: vertical; min-height: 80px; }
-  .rating-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .rating-btn { width: 44px; height: 44px; border: 1px solid var(--gray-200); border-radius: 8px; background: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--gray-700); cursor: pointer; transition: all 0.15s; }
-  .rating-btn:hover { border-color: var(--blue); color: var(--blue); }
-  .rating-btn.selected { background: var(--blue); color: #fff; border-color: var(--blue); }
-  .radio-group, .check-group { display: flex; flex-direction: column; gap: 10px; }
+  input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(185,155,100,0.12); }
+  textarea { resize: vertical; min-height: 90px; }
+
+  /* Optiuni cu cifre (scala) */
+  .scale-options { display: flex; flex-direction: column; gap: 8px; }
+  .scale-opt { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 14px; }
+  .scale-opt:hover { border-color: var(--gold); background: var(--gold-light); }
+  .scale-opt.selected { border-color: var(--gold); background: var(--gold-light); color: var(--green); font-weight: 500; }
+  .scale-opt input[type=radio] { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; }
+  .scale-badge { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--gray-200); font-size: 12px; font-weight: 600; color: var(--gray-400); flex-shrink: 0; transition: all 0.15s; }
+  .scale-opt.selected .scale-badge { background: var(--gold); border-color: var(--gold); color: #fff; }
+
+  /* Program dropdown - lista programe */
+  .prog-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .prog-opt { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
+  .prog-opt:hover { border-color: var(--gold); background: var(--gold-light); }
+  .prog-opt.selected { border-color: var(--gold); background: var(--gold-light); color: var(--green); font-weight: 500; }
+  .prog-opt input { accent-color: var(--gold); width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* Sectiunea 2 - Insertie */
+  .radio-group { display: flex; flex-direction: column; gap: 10px; }
   .radio-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 14px; }
-  .radio-option:hover { border-color: var(--blue); background: var(--blue-light); }
-  .radio-option.selected { border-color: var(--blue); background: var(--blue-light); color: var(--blue); font-weight: 500; }
-  .radio-option input { accent-color: var(--blue); width: 16px; height: 16px; }
+  .radio-option:hover { border-color: var(--gold); background: var(--gold-light); }
+  .radio-option.selected { border-color: var(--gold); background: var(--gold-light); color: var(--green); font-weight: 500; }
+  .radio-option input { accent-color: var(--gold); width: 16px; height: 16px; }
+
+  /* GDPR */
   .gdpr-box { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 16px; font-size: 13px; color: var(--gray-700); line-height: 1.7; margin-bottom: 16px; max-height: 200px; overflow-y: auto; }
   .gdpr-box h4 { font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--gray-900); }
   .check-agree { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; font-size: 13px; line-height: 1.5; margin-bottom: 12px; }
-  .check-agree input { accent-color: var(--blue); width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0; }
-  .check-agree.selected { border-color: var(--blue); background: var(--blue-light); }
+  .check-agree input { accent-color: var(--gold); width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0; }
+  .check-agree.selected { border-color: var(--gold); background: var(--gold-light); }
+
+  /* Calendar */
   .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
   .cal-nav button { width: 32px; height: 32px; border: 1px solid var(--gray-200); border-radius: 6px; background: #fff; cursor: pointer; font-size: 16px; color: var(--gray-700); display: flex; align-items: center; justify-content: center; }
-  .cal-nav button:hover { border-color: var(--blue); color: var(--blue); }
+  .cal-nav button:hover { border-color: var(--gold); color: var(--gold); }
   .cal-month { font-weight: 500; font-size: 15px; }
   .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 20px; }
   .cal-head { text-align: center; font-size: 12px; color: var(--gray-400); padding: 6px 0; }
   .cal-day { text-align: center; padding: 8px 4px; border-radius: 6px; font-size: 14px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
-  .cal-day:hover:not(.empty):not(.past) { border-color: var(--blue); color: var(--blue); }
+  .cal-day:hover:not(.empty):not(.past) { border-color: var(--gold); color: var(--gold); }
   .cal-day.empty { cursor: default; }
   .cal-day.past { color: var(--gray-400); cursor: not-allowed; }
-  .cal-day.selected { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .cal-day.selected { background: var(--green); color: #fff; border-color: var(--green); }
   .cal-day.today { font-weight: 500; }
   .slots-title { font-size: 13px; font-weight: 500; color: var(--gray-700); margin-bottom: 12px; }
   .slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
   .slot-btn { padding: 10px 6px; border: 1px solid var(--gray-200); border-radius: 8px; background: #fff; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--gray-700); cursor: pointer; text-align: center; transition: all 0.15s; }
-  .slot-btn:hover:not(.taken) { border-color: var(--blue); color: var(--blue); }
-  .slot-btn.selected { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .slot-btn:hover:not(.taken) { border-color: var(--gold); color: var(--gold); }
+  .slot-btn.selected { background: var(--green); color: #fff; border-color: var(--green); }
   .slot-btn.taken { background: var(--gray-100); color: var(--gray-400); cursor: not-allowed; text-decoration: line-through; }
-  .slot-btn:disabled {
-  pointer-events: none;
-}
-
-.booked-slots {
-  margin-top: 14px;
-  padding: 12px 14px;
-  background: #fff7f7;
-  border: 1px solid #f0c6c6;
-  border-radius: 8px;
-  font-size: 13px;
-  color: var(--gray-700);
-  display: none;
-}
-
-.booked-slots strong {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--red);
-  font-weight: 500;
-}
-
-.booked-slot-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
-.booked-slot-pill {
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: #fbe4e4;
-  color: var(--red);
-  font-size: 12px;
-  text-decoration: line-through;
-}
-  .selected-info { background: var(--green-light); border: 1px solid #9fe1cb; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--green); font-weight: 500; margin-top: 16px; display: none; }
+  .selected-info { background: var(--green-light); border: 1px solid #9bc7c0; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--green); font-weight: 500; margin-top: 16px; display: none; }
   .loading-slots { text-align: center; padding: 20px; font-size: 13px; color: var(--gray-400); display: none; }
+
+  /* Buttons */
   .btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; }
   .btn { padding: 11px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
   .btn-secondary { background: #fff; border-color: var(--gray-200); color: var(--gray-700); }
   .btn-secondary:hover { border-color: var(--gray-700); }
-  .btn-primary { background: var(--blue); color: #fff; }
-  .btn-primary:hover { background: var(--blue-dark); }
+  .btn-primary { background: var(--green); color: #fff; }
+  .btn-primary:hover { background: var(--green-dark); }
   .btn-primary:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
+
+  /* Success */
   .success-screen { text-align: center; padding: 60px 24px; }
   .success-icon { width: 64px; height: 64px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 28px; color: var(--green); }
-  .success-screen h2 { font-family: 'DM Serif Display', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; }
+  .success-screen h2 { font-family: 'DM Serif Display', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; color: var(--green); }
   .success-screen p { font-size: 15px; color: var(--gray-400); line-height: 1.6; }
   .summary-box { background: var(--gray-100); border-radius: 8px; padding: 16px; margin-top: 20px; text-align: left; font-size: 13px; }
   .summary-box div { padding: 6px 0; border-bottom: 1px solid var(--gray-200); display: flex; justify-content: space-between; }
   .summary-box div:last-child { border-bottom: none; }
   .summary-box span:first-child { color: var(--gray-400); }
   .summary-box span:last-child { font-weight: 500; }
-  .progress-bar { height: 3px; background: var(--gray-200); }
-  .progress-fill { height: 100%; background: var(--blue); transition: width 0.3s ease; }
+
+  .progress-bar { height: 3px; background: rgba(255,255,255,0.2); }
+  .progress-fill { height: 100%; background: var(--gold); transition: width 0.3s ease; }
   .error-msg { font-size: 12px; color: var(--red); margin-top: 6px; display: none; }
-  @media (max-width: 480px) { .slots-grid { grid-template-columns: repeat(3, 1fr); } header h1 { font-size: 17px; } }
+
+  @media (max-width: 520px) {
+    .prog-list { grid-template-columns: 1fr; }
+    .slots-grid { grid-template-columns: repeat(3, 1fr); }
+    header h1 { font-size: 16px; }
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo-placeholder">Logo<br>inst.</div>
+  <div class="logo-placeholder">UMF<br>Iași</div>
   <div>
-    <h1>Denumire instituție</h1>
+    <h1>UMF „Grigore T. Popa" Iași</h1>
     <p>Formular online · Acces public</p>
   </div>
 </header>
@@ -154,53 +150,198 @@
 
 <div class="container">
 
-  <!-- SECTIUNEA 1: Satisfactie -->
+  <!-- SECTIUNEA 1: Satisfactie educationala -->
   <div class="section active" id="sec0">
-    <h2 class="section-title">Chestionar de satisfacție</h2>
-    <p class="section-desc">Vă rugăm să evaluați experiența dumneavoastră cu serviciile noastre.</p>
+    <h2 class="section-title">Chestionar de satisfacție a parcursului educațional</h2>
+    <p class="section-desc">Acest chestionar cuprinde întrebări care se referă la parcursul educațional din cadrul UMF „Grigore T. Popa" Iași. Formularul se completează prin bifarea cifrei corespunzătoare răspunsului ales. Toate câmpurile sunt obligatorii.</p>
+
+    <!-- Q1: Program -->
     <div class="card">
-      <div class="field">
-        <label>Cum evaluați în general serviciile instituției? <span class="req">*</span></label>
-        <div class="rating-group" id="rating1">
-          <button class="rating-btn" onclick="selectRating('rating1',this,1)">1</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,2)">2</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,3)">3</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,4)">4</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,5)">5</button>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-400);margin-top:6px;"><span>Foarte nemulțumit</span><span>Foarte mulțumit</span></div>
+      <div class="q-header">
+        <span class="q-num">1</span>
+        <span class="q-label">Am absolvit programul de studii <span style="color:var(--red)">*</span></span>
+      </div>
+      <div class="prog-list" id="pgList">
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Medicină"> Medicină</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Medicină Dentară"> Medicină Dentară</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Farmacie"> Farmacie</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Bioinginerie medicală"> Bioinginerie medicală</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Asistență Medicală Generală"> Asistență Medicală Generală</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Nutriție și Dietetică"> Nutriție și Dietetică</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Radiologie și Imagistică medicală"> Radiologie și Imagistică</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Tehnică Dentară"> Tehnică Dentară</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Asistență de profilaxie stomatologică"> Asistență profilaxie stomatologică</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Balneofiziokinetoterapie"> Balneofiziokinetoterapie</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Audiologie"> Audiologie</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Cosmetică medicală și tehnologia produsului cosmetic"> Cosmetică medicală</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Chimie medicală"> Chimie medicală</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Masterat domeniul Medicină"> Masterat – Medicină</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Masterat domeniul Medicină Dentară"> Masterat – Medicină Dentară</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Masterat domeniul Științe Inginerești aplicate"> Masterat – Științe Inginerești</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Masterat domeniul Farmacie"> Masterat – Farmacie</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Doctorat domeniul Medicină"> Doctorat – Medicină</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Doctorat domeniul Medicină Dentară"> Doctorat – Medicină Dentară</label>
+        <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Doctorat domeniul Farmacie"> Doctorat – Farmacie</label>
+      </div>
+      <div class="error-msg" id="err_program">Selectați programul de studii</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">2</span><span class="q-label">Cadrele didactice dau dovadă de profesionalism și competență în cadrul disciplinelor pe care le predau <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq2">
+        <label class="scale-opt" onclick="selectScale('sq2',this,'Întotdeauna')"><input type="radio" name="sq2"><span class="scale-badge">1</span>Întotdeauna</label>
+        <label class="scale-opt" onclick="selectScale('sq2',this,'În cele mai multe cazuri')"><input type="radio" name="sq2"><span class="scale-badge">2</span>În cele mai multe cazuri</label>
+        <label class="scale-opt" onclick="selectScale('sq2',this,'Foarte rar')"><input type="radio" name="sq2"><span class="scale-badge">3</span>Foarte rar</label>
+        <label class="scale-opt" onclick="selectScale('sq2',this,'Niciodată')"><input type="radio" name="sq2"><span class="scale-badge">4</span>Niciodată</label>
       </div>
     </div>
+
+    <!-- Q3 -->
     <div class="card">
-      <div class="field">
-        <label>Cum apreciați amabilitatea personalului? <span class="req">*</span></label>
-        <div class="rating-group" id="rating2">
-          <button class="rating-btn" onclick="selectRating('rating2',this,1)">1</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,2)">2</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,3)">3</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,4)">4</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,5)">5</button>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-400);margin-top:6px;"><span>Foarte nemulțumit</span><span>Foarte mulțumit</span></div>
+      <div class="q-header"><span class="q-num">3</span><span class="q-label">Consider că informațiile prezentate în cadrul cursurilor îmi sunt folositoare pentru dezvoltarea profesională <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq3">
+        <label class="scale-opt" onclick="selectScale('sq3',this,'În mare măsură')"><input type="radio" name="sq3"><span class="scale-badge">1</span>În mare măsură</label>
+        <label class="scale-opt" onclick="selectScale('sq3',this,'Într-o oarecare măsură')"><input type="radio" name="sq3"><span class="scale-badge">2</span>Într-o oarecare măsură</label>
+        <label class="scale-opt" onclick="selectScale('sq3',this,'În mică măsură')"><input type="radio" name="sq3"><span class="scale-badge">3</span>În mică măsură</label>
       </div>
     </div>
+
+    <!-- Q4 -->
     <div class="card">
-      <div class="field">
-        <label>Cum apreciați timpul de așteptare?</label>
-        <div class="radio-group">
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="sub5"> Sub 5 minute</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="5-15"> 5–15 minute</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="15-30"> 15–30 minute</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="peste30"> Peste 30 de minute</label>
-        </div>
+      <div class="q-header"><span class="q-num">4</span><span class="q-label">De cele mai multe ori ponderea orelor destinate părții aplicative din totalul orelor alocate disciplinelor este <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq4">
+        <label class="scale-opt" onclick="selectScale('sq4',this,'Prea mare')"><input type="radio" name="sq4"><span class="scale-badge">1</span>Prea mare</label>
+        <label class="scale-opt" onclick="selectScale('sq4',this,'Adecvată')"><input type="radio" name="sq4"><span class="scale-badge">2</span>Adecvată</label>
+        <label class="scale-opt" onclick="selectScale('sq4',this,'Prea mică')"><input type="radio" name="sq4"><span class="scale-badge">3</span>Prea mică</label>
       </div>
     </div>
+
+    <!-- Q5 -->
     <div class="card">
-      <div class="field">
-        <label>Observații și sugestii</label>
-        <textarea id="obs" placeholder="Scrieți aici orice observație sau sugestie..."></textarea>
+      <div class="q-header"><span class="q-num">5</span><span class="q-label">Dotarea sălilor de curs corespunde necesităților predării <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq5">
+        <label class="scale-opt" onclick="selectScale('sq5',this,'În mare măsură')"><input type="radio" name="sq5"><span class="scale-badge">1</span>În mare măsură</label>
+        <label class="scale-opt" onclick="selectScale('sq5',this,'Într-o oarecare măsură')"><input type="radio" name="sq5"><span class="scale-badge">2</span>Într-o oarecare măsură</label>
+        <label class="scale-opt" onclick="selectScale('sq5',this,'În mică măsură')"><input type="radio" name="sq5"><span class="scale-badge">3</span>În mică măsură</label>
       </div>
     </div>
+
+    <!-- Q6 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">6</span><span class="q-label">Dotarea laboratoarelor corespunde necesităților predării <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq6">
+        <label class="scale-opt" onclick="selectScale('sq6',this,'În mare măsură')"><input type="radio" name="sq6"><span class="scale-badge">1</span>În mare măsură</label>
+        <label class="scale-opt" onclick="selectScale('sq6',this,'Într-o oarecare măsură')"><input type="radio" name="sq6"><span class="scale-badge">2</span>Într-o oarecare măsură</label>
+        <label class="scale-opt" onclick="selectScale('sq6',this,'În mică măsură')"><input type="radio" name="sq6"><span class="scale-badge">3</span>În mică măsură</label>
+      </div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">7</span><span class="q-label">Disponibilitatea cadrelor didactice / conducător de doctorat (consultații, îndrumare) este în general <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq7">
+        <label class="scale-opt" onclick="selectScale('sq7',this,'Mare')"><input type="radio" name="sq7"><span class="scale-badge">1</span>Mare</label>
+        <label class="scale-opt" onclick="selectScale('sq7',this,'Moderată')"><input type="radio" name="sq7"><span class="scale-badge">2</span>Moderată</label>
+        <label class="scale-opt" onclick="selectScale('sq7',this,'Redusă')"><input type="radio" name="sq7"><span class="scale-badge">3</span>Redusă</label>
+      </div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">8</span><span class="q-label">Evaluarea cunoștințelor în cadrul disciplinelor a fost de cele mai multe ori <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq8">
+        <label class="scale-opt" onclick="selectScale('sq8',this,'Obiectivă')"><input type="radio" name="sq8"><span class="scale-badge">1</span>Obiectivă</label>
+        <label class="scale-opt" onclick="selectScale('sq8',this,'Subiectivă')"><input type="radio" name="sq8"><span class="scale-badge">2</span>Subiectivă</label>
+        <label class="scale-opt" onclick="selectScale('sq8',this,'Nu pot aprecia')"><input type="radio" name="sq8"><span class="scale-badge">3</span>Nu pot aprecia</label>
+      </div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">9</span><span class="q-label">În relația cu cadrele didactice m-am simțit respectat <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq9">
+        <label class="scale-opt" onclick="selectScale('sq9',this,'Întotdeauna')"><input type="radio" name="sq9"><span class="scale-badge">1</span>Întotdeauna</label>
+        <label class="scale-opt" onclick="selectScale('sq9',this,'De cele mai multe ori')"><input type="radio" name="sq9"><span class="scale-badge">2</span>De cele mai multe ori</label>
+        <label class="scale-opt" onclick="selectScale('sq9',this,'Câteodată')"><input type="radio" name="sq9"><span class="scale-badge">3</span>Câteodată</label>
+        <label class="scale-opt" onclick="selectScale('sq9',this,'Rar')"><input type="radio" name="sq9"><span class="scale-badge">4</span>Rar</label>
+        <label class="scale-opt" onclick="selectScale('sq9',this,'Niciodată')"><input type="radio" name="sq9"><span class="scale-badge">5</span>Niciodată</label>
+      </div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">10</span><span class="q-label">Atitudinea personalului administrativ (secretariat) față de student este <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq10">
+        <label class="scale-opt" onclick="selectScale('sq10',this,'Foarte bună')"><input type="radio" name="sq10"><span class="scale-badge">1</span>Foarte bună</label>
+        <label class="scale-opt" onclick="selectScale('sq10',this,'Bună')"><input type="radio" name="sq10"><span class="scale-badge">2</span>Bună</label>
+        <label class="scale-opt" onclick="selectScale('sq10',this,'Lipsită de solicitudine')"><input type="radio" name="sq10"><span class="scale-badge">3</span>Lipsită de solicitudine</label>
+        <label class="scale-opt" onclick="selectScale('sq10',this,'Necorespunzătoare')"><input type="radio" name="sq10"><span class="scale-badge">4</span>Necorespunzătoare</label>
+      </div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">11</span><span class="q-label">Atitudinea personalului de la Biblioteca universității față de student este <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq11">
+        <label class="scale-opt" onclick="selectScale('sq11',this,'Foarte bună')"><input type="radio" name="sq11"><span class="scale-badge">1</span>Foarte bună</label>
+        <label class="scale-opt" onclick="selectScale('sq11',this,'Bună')"><input type="radio" name="sq11"><span class="scale-badge">2</span>Bună</label>
+        <label class="scale-opt" onclick="selectScale('sq11',this,'Lipsită de solicitudine')"><input type="radio" name="sq11"><span class="scale-badge">3</span>Lipsită de solicitudine</label>
+        <label class="scale-opt" onclick="selectScale('sq11',this,'Necorespunzătoare')"><input type="radio" name="sq11"><span class="scale-badge">4</span>Necorespunzătoare</label>
+      </div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">12</span><span class="q-label">Atitudinea personalului de la Facilități studenți (Cămine, Cantină) față de student este <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq12">
+        <label class="scale-opt" onclick="selectScale('sq12',this,'Foarte bună')"><input type="radio" name="sq12"><span class="scale-badge">1</span>Foarte bună</label>
+        <label class="scale-opt" onclick="selectScale('sq12',this,'Bună')"><input type="radio" name="sq12"><span class="scale-badge">2</span>Bună</label>
+        <label class="scale-opt" onclick="selectScale('sq12',this,'Lipsită de solicitudine')"><input type="radio" name="sq12"><span class="scale-badge">3</span>Lipsită de solicitudine</label>
+        <label class="scale-opt" onclick="selectScale('sq12',this,'Necorespunzătoare')"><input type="radio" name="sq12"><span class="scale-badge">4</span>Necorespunzătoare</label>
+      </div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">13</span><span class="q-label">Atitudinea personalului de la SCOP al universității față de student este <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq13">
+        <label class="scale-opt" onclick="selectScale('sq13',this,'Foarte bună')"><input type="radio" name="sq13"><span class="scale-badge">1</span>Foarte bună</label>
+        <label class="scale-opt" onclick="selectScale('sq13',this,'Bună')"><input type="radio" name="sq13"><span class="scale-badge">2</span>Bună</label>
+        <label class="scale-opt" onclick="selectScale('sq13',this,'Lipsită de solicitudine')"><input type="radio" name="sq13"><span class="scale-badge">3</span>Lipsită de solicitudine</label>
+        <label class="scale-opt" onclick="selectScale('sq13',this,'Necorespunzătoare')"><input type="radio" name="sq13"><span class="scale-badge">4</span>Necorespunzătoare</label>
+      </div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">14</span><span class="q-label">Rețeaua de intranet (mail profesional, conexiune) a universității este <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq14">
+        <label class="scale-opt" onclick="selectScale('sq14',this,'Foarte bună')"><input type="radio" name="sq14"><span class="scale-badge">1</span>Foarte bună</label>
+        <label class="scale-opt" onclick="selectScale('sq14',this,'Bună')"><input type="radio" name="sq14"><span class="scale-badge">2</span>Bună</label>
+        <label class="scale-opt" onclick="selectScale('sq14',this,'Necorespunzătoare')"><input type="radio" name="sq14"><span class="scale-badge">3</span>Necorespunzătoare</label>
+      </div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">15</span><span class="q-label">În cazul deciziilor care îi vizează în mod direct, reprezentanții studenților sunt consultați <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="sq15">
+        <label class="scale-opt" onclick="selectScale('sq15',this,'Întotdeauna')"><input type="radio" name="sq15"><span class="scale-badge">1</span>Întotdeauna</label>
+        <label class="scale-opt" onclick="selectScale('sq15',this,'De cele mai multe ori')"><input type="radio" name="sq15"><span class="scale-badge">2</span>De cele mai multe ori</label>
+        <label class="scale-opt" onclick="selectScale('sq15',this,'Câteodată')"><input type="radio" name="sq15"><span class="scale-badge">3</span>Câteodată</label>
+        <label class="scale-opt" onclick="selectScale('sq15',this,'Rar')"><input type="radio" name="sq15"><span class="scale-badge">4</span>Rar</label>
+        <label class="scale-opt" onclick="selectScale('sq15',this,'Niciodată')"><input type="radio" name="sq15"><span class="scale-badge">5</span>Niciodată</label>
+      </div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">16</span><span class="q-label">Propuneri pentru optimizarea procesului educațional</span></div>
+      <textarea id="propuneri" placeholder="Scrieți aici propunerile dumneavoastră..."></textarea>
+    </div>
+
+    <div class="error-msg" id="err_satisf" style="display:none; font-size:13px; margin-bottom:12px;">Vă rugăm să răspundeți la toate întrebările obligatorii (1–15).</div>
     <div class="btn-row">
       <button class="btn btn-primary" onclick="nextSection0()">Continuă →</button>
     </div>
@@ -265,12 +406,12 @@
     <div class="card">
       <div class="gdpr-box">
         <h4>Informare privind prelucrarea datelor cu caracter personal</h4>
-        <p>În conformitate cu Regulamentul (UE) 2016/679 (GDPR), vă informăm că datele dumneavoastră cu caracter personal sunt prelucrate de [Denumire instituție], cu sediul în [Adresă], în calitate de operator.</p><br>
+        <p>În conformitate cu Regulamentul (UE) 2016/679 (GDPR), vă informăm că datele dumneavoastră cu caracter personal sunt prelucrate de UMF „Grigore T. Popa" Iași, cu sediul în Str. Universității nr. 16, Iași, în calitate de operator.</p><br>
         <p><strong>Scopul prelucrării:</strong> Datele colectate prin acest formular sunt utilizate exclusiv pentru gestionarea solicitărilor dumneavoastră și îmbunătățirea serviciilor oferite.</p><br>
         <p><strong>Datele prelucrate:</strong> Nume, prenume, adresă de email, număr de telefon, categoria beneficiarului, scopul solicitării.</p><br>
         <p><strong>Temeiul juridic:</strong> Consimțământul dumneavoastră explicit, exprimat prin bifarea căsuței de acord.</p><br>
         <p><strong>Durata stocării:</strong> Datele vor fi stocate pe o perioadă de maxim 3 ani de la data colectării, după care vor fi șterse în mod securizat.</p><br>
-        <p><strong>Drepturile dumneavoastră:</strong> Aveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Pentru exercitarea acestor drepturi, contactați-ne la [email DPO].</p><br>
+        <p><strong>Drepturile dumneavoastră:</strong> Aveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Pentru exercitarea acestor drepturi, contactați-ne la adresa DPO a universității.</p><br>
         <p><strong>Transferuri:</strong> Datele nu sunt transferate către terți sau în afara UE.</p>
       </div>
       <label class="check-agree" id="gdprCheck1" onclick="toggleCheck(this, 'gdpr1')">
@@ -329,9 +470,12 @@
   var URL_POST_FORMULAR = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6d715b5c8d914ac7ac80d5ef08cb23fd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-O_lQBZSr5MBoOCK0_VmqhfENVhAcneMhirBTJ14rIQ';
 
   var currentSection = 0;
+  var scaleAnswers = {};
   var formData = {
-    rating1: null, rating2: null, timpAsteptare: '',
-    observatii: '', nume: '', email: '', telefon: '',
+    program: '',
+    scaleAnswers: {},
+    propuneri: '',
+    nume: '', email: '', telefon: '',
     categorie: '', scop: '', gdpr1: false, gdpr2: false,
     DataProgramare: null, OraProgramare: null
   };
@@ -361,10 +505,15 @@
     window.scrollTo(0, 0);
   }
 
-  function selectRating(groupId, btn, val) {
-    document.getElementById(groupId).querySelectorAll('.rating-btn').forEach(function(b) { b.classList.remove('selected'); });
-    btn.classList.add('selected');
-    formData[groupId] = val;
+  function selectProg(label) {
+    document.querySelectorAll('.prog-opt').forEach(function(l) { l.classList.remove('selected'); });
+    label.classList.add('selected');
+  }
+
+  function selectScale(groupId, label, val) {
+    document.getElementById(groupId).querySelectorAll('.scale-opt').forEach(function(l) { l.classList.remove('selected'); });
+    label.classList.add('selected');
+    scaleAnswers[groupId] = val;
   }
 
   function selectRadio(label) {
@@ -385,17 +534,26 @@
   }
 
   function nextSection0() {
-    if (!formData.rating1 || !formData.rating2) {
-      alert('Vă rugăm să completați toate evaluările obligatorii.');
-      return;
+    var program = (document.querySelector('input[name="program"]:checked') || {}).value || '';
+    document.getElementById('err_program').style.display = program ? 'none' : 'block';
+    if (!program) { document.getElementById('err_program').scrollIntoView({behavior:'smooth', block:'center'}); return; }
+
+    var required = ['sq2','sq3','sq4','sq5','sq6','sq7','sq8','sq9','sq10','sq11','sq12','sq13','sq14','sq15'];
+    var allOk = true;
+    for (var i = 0; i < required.length; i++) {
+      if (!scaleAnswers[required[i]]) { allOk = false; break; }
     }
-    formData.timpAsteptare = (document.querySelector('input[name="asteptare"]:checked') || {}).value || '';
-    formData.observatii = document.getElementById('obs').value;
+    var errEl = document.getElementById('err_satisf');
+    errEl.style.display = allOk ? 'none' : 'block';
+    if (!allOk) { errEl.scrollIntoView({behavior:'smooth', block:'center'}); return; }
+
+    formData.program = program;
+    formData.scaleAnswers = JSON.parse(JSON.stringify(scaleAnswers));
+    formData.propuneri = document.getElementById('propuneri').value;
     goTo(1);
   }
 
   function nextSection1() {
-    var ok = true;
     var nume = document.getElementById('ins_nume').value.trim();
     var email = document.getElementById('ins_email').value.trim();
     var categorie = (document.querySelector('input[name="categorie"]:checked') || {}).value || '';
@@ -464,86 +622,46 @@
     loadSloturi(date);
   }
 
-function loadSloturi(date) {
-  var section = document.getElementById('slotsSection');
-  var loading = document.getElementById('loadingSlots');
+  function loadSloturi(date) {
+    var section = document.getElementById('slotsSection');
+    var loading = document.getElementById('loadingSlots');
+    section.style.display = 'none';
+    loading.style.display = 'block';
 
-  section.style.display = 'none';
-  loading.style.display = 'block';
+    var dateStr = date.getFullYear() + '-' +
+      String(date.getMonth() + 1).padStart(2, '0') + '-' +
+      String(date.getDate()).padStart(2, '0');
 
-  var dateStr = date.getFullYear() + '-' +
-    String(date.getMonth() + 1).padStart(2, '0') + '-' +
-    String(date.getDate()).padStart(2, '0');
+    fetch(URL_GET_SLOTURI, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ data: dateStr })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      loading.style.display = 'none';
+      var sloturi = [];
+      if (data && Array.isArray(data.sloturi)) sloturi = data.sloturi;
+      else if (data && typeof data.sloturi === 'string') { try { sloturi = JSON.parse(data.sloturi); } catch(e) { sloturi = []; } }
+      else if (Array.isArray(data)) sloturi = data;
 
-  fetch(URL_GET_SLOTURI, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ data: dateStr })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    console.log('RASPUNS:', JSON.stringify(data));
-
-    loading.style.display = 'none';
-
-    var ocupate = [];
-    var sloturi = [];
-
-    // Accepta atat array direct, cat si string JSON din Power Automate
-    if (data && Array.isArray(data.sloturi)) {
-      sloturi = data.sloturi;
-    } else if (data && typeof data.sloturi === 'string') {
-      try {
-        sloturi = JSON.parse(data.sloturi);
-      } catch (e) {
-        console.error('Eroare parsare data.sloturi:', e);
-        sloturi = [];
-      }
-    } else if (Array.isArray(data)) {
-      sloturi = data;
-    }
-
-    sloturi.forEach(function(item, index) {
-      if (item && item.OraProgramare) {
-        var dt = new Date(item.OraProgramare);
-
-        var dataConvertita = dt.toLocaleDateString('en-CA', {
-          timeZone: 'Europe/Bucharest'
-        });
-
-        var oraConvertita = dt.toLocaleTimeString('ro-RO', {
-          timeZone: 'Europe/Bucharest',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
-        });
-
-        console.log('SLOT CONVERTIT #' + (index + 1), {
-          OraProgramareOriginal: item.OraProgramare,
-          dataConvertitaRomania: dataConvertita,
-          oraConvertitaRomania: oraConvertita
-        });
-
-        if (dataConvertita === dateStr) {
-          ocupate.push(oraConvertita);
+      var ocupate = [];
+      sloturi.forEach(function(item) {
+        if (item && item.OraProgramare) {
+          var dt = new Date(item.OraProgramare);
+          var dataConv = dt.toLocaleDateString('en-CA', { timeZone: 'Europe/Bucharest' });
+          var oraConv = dt.toLocaleTimeString('ro-RO', { timeZone: 'Europe/Bucharest', hour: '2-digit', minute: '2-digit', hour12: false });
+          if (dataConv === dateStr) ocupate.push(oraConv);
         }
-      }
+      });
+      ocupate = ocupate.filter(function(v, i, s) { return s.indexOf(v) === i; });
+      renderSlots(date, ocupate);
+    })
+    .catch(function() {
+      loading.style.display = 'none';
+      renderSlots(date, []);
     });
-
-    ocupate = ocupate.filter(function(value, index, self) {
-      return self.indexOf(value) === index;
-    });
-
-    console.log('Sloturi ocupate pentru ' + dateStr + ':', ocupate);
-
-    renderSlots(date, ocupate);
-  })
-  .catch(function(err) {
-    console.error('Eroare la incarcarea sloturilor:', err);
-    loading.style.display = 'none';
-    renderSlots(date, []);
-  });
-}
+  }
 
   function renderSlots(date, ocupate) {
     var section = document.getElementById('slotsSection');
@@ -565,12 +683,9 @@ function loadSloturi(date) {
       var btn = document.createElement('button');
       btn.className = 'slot-btn' + (taken ? ' taken' : '');
       btn.textContent = slot;
-      if (!taken) {
-        btn.onclick = function() { selectSlot(slot, btn, date); };
-      }
+      if (!taken) { btn.onclick = function() { selectSlot(slot, btn, date); }; }
       grid.appendChild(btn);
     });
-
     section.style.display = 'block';
   }
 
@@ -613,10 +728,9 @@ function loadSloturi(date) {
       telefon: formData.telefon,
       categorie: formData.categorie,
       scop: formData.scop,
-      rating1: formData.rating1,
-      rating2: formData.rating2,
-      timpAsteptare: formData.timpAsteptare,
-      observatii: formData.observatii,
+      program: formData.program,
+      raspunsuri: formData.scaleAnswers,
+      propuneri: formData.propuneri,
       DataProgramare: dateStr,
       OraProgramare: formData.OraProgramare,
       gdpr: formData.gdpr1
@@ -636,6 +750,7 @@ function loadSloturi(date) {
     summary.innerHTML =
       '<div><span>Nume</span><span>' + formData.nume + '</span></div>' +
       '<div><span>Email</span><span>' + formData.email + '</span></div>' +
+      '<div><span>Program absolvit</span><span>' + formData.program + '</span></div>' +
       '<div><span>Data programării</span><span>' + formData.DataProgramare.getDate() + ' ' + months[formData.DataProgramare.getMonth()] + ' ' + formData.DataProgramare.getFullYear() + '</span></div>' +
       '<div><span>Ora</span><span>' + formData.OraProgramare + '</span></div>';
     document.getElementById('sec3').classList.remove('active');
