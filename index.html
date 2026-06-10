@@ -5,646 +5,241 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Formular instituție</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap');
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --blue: #1a56db; --blue-light: #e8f0fe; --blue-dark: #1240a8;
-    --green: #0f6e56; --green-light: #e1f5ee;
-    --gray-100: #f7f7f5; --gray-200: #ebebea; --gray-400: #9b9a95;
-    --gray-700: #3d3d3a; --gray-900: #1a1a18; --red: #c0392b;
-    --radius: 10px;
-  }
-  body { font-family: 'DM Sans', sans-serif; background: var(--gray-100); color: var(--gray-900); min-height: 100vh; padding: 0 0 60px; }
-  header { background: #fff; border-bottom: 1px solid var(--gray-200); padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
-  .logo-placeholder { width: 48px; height: 48px; border: 1.5px dashed var(--gray-400); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--gray-400); text-align: center; line-height: 1.3; }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: 20px; font-weight: 400; }
-  header p { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
-  .steps { display: flex; background: #fff; border-bottom: 1px solid var(--gray-200); overflow-x: auto; padding: 0 24px; }
-  .step-btn { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: var(--gray-400); background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; white-space: nowrap; transition: all 0.2s; }
-  .step-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 500; }
-  .step-btn.done { color: var(--green); }
-  .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--gray-200); color: var(--gray-700); font-size: 11px; font-weight: 500; margin-right: 8px; }
-  .step-btn.active .step-num { background: var(--blue); color: #fff; }
-  .step-btn.done .step-num { background: var(--green); color: #fff; }
-  .container { max-width: 680px; margin: 0 auto; padding: 32px 16px 0; }
-  .section { display: none; }
-  .section.active { display: block; }
-  .section-title { font-family: 'DM Serif Display', serif; font-size: 22px; font-weight: 400; margin-bottom: 6px; }
-  .section-desc { font-size: 14px; color: var(--gray-400); margin-bottom: 28px; }
-  .card { background: #fff; border: 1px solid var(--gray-200); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; }
-  .field { margin-bottom: 20px; }
-  .field:last-child { margin-bottom: 0; }
-  label { display: block; font-size: 13px; font-weight: 500; color: var(--gray-700); margin-bottom: 8px; }
-  label .req { color: var(--red); margin-left: 2px; }
-  input[type=text], input[type=email], input[type=tel], select, textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--gray-900); background: #fff; outline: none; transition: border-color 0.15s; }
-  input:focus, select:focus, textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(26,86,219,0.08); }
-  textarea { resize: vertical; min-height: 80px; }
-  .rating-group { display: flex; gap: 8px; flex-wrap: wrap; }
-  .rating-btn { width: 44px; height: 44px; border: 1px solid var(--gray-200); border-radius: 8px; background: #fff; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--gray-700); cursor: pointer; transition: all 0.15s; }
-  .rating-btn:hover { border-color: var(--blue); color: var(--blue); }
-  .rating-btn.selected { background: var(--blue); color: #fff; border-color: var(--blue); }
-  .radio-group, .check-group { display: flex; flex-direction: column; gap: 10px; }
-  .radio-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 14px; }
-  .radio-option:hover { border-color: var(--blue); background: var(--blue-light); }
-  .radio-option.selected { border-color: var(--blue); background: var(--blue-light); color: var(--blue); font-weight: 500; }
-  .radio-option input { accent-color: var(--blue); width: 16px; height: 16px; }
-  .gdpr-box { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 16px; font-size: 13px; color: var(--gray-700); line-height: 1.7; margin-bottom: 16px; max-height: 200px; overflow-y: auto; }
-  .gdpr-box h4 { font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--gray-900); }
-  .check-agree { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; font-size: 13px; line-height: 1.5; margin-bottom: 12px; }
-  .check-agree input { accent-color: var(--blue); width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0; }
-  .check-agree.selected { border-color: var(--blue); background: var(--blue-light); }
-  .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-  .cal-nav button { width: 32px; height: 32px; border: 1px solid var(--gray-200); border-radius: 6px; background: #fff; cursor: pointer; font-size: 16px; color: var(--gray-700); display: flex; align-items: center; justify-content: center; }
-  .cal-nav button:hover { border-color: var(--blue); color: var(--blue); }
-  .cal-month { font-weight: 500; font-size: 15px; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 20px; }
-  .cal-head { text-align: center; font-size: 12px; color: var(--gray-400); padding: 6px 0; }
-  .cal-day { text-align: center; padding: 8px 4px; border-radius: 6px; font-size: 14px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
-  .cal-day:hover:not(.empty):not(.past) { border-color: var(--blue); color: var(--blue); }
-  .cal-day.empty { cursor: default; }
-  .cal-day.past { color: var(--gray-400); cursor: not-allowed; }
-  .cal-day.selected { background: var(--blue); color: #fff; border-color: var(--blue); }
-  .cal-day.today { font-weight: 500; }
-  .slots-title { font-size: 13px; font-weight: 500; color: var(--gray-700); margin-bottom: 12px; }
-  .slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .slot-btn { padding: 10px 6px; border: 1px solid var(--gray-200); border-radius: 8px; background: #fff; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--gray-700); cursor: pointer; text-align: center; transition: all 0.15s; }
-  .slot-btn:hover:not(.taken) { border-color: var(--blue); color: var(--blue); }
-  .slot-btn.selected { background: var(--blue); color: #fff; border-color: var(--blue); }
-  .slot-btn.taken { background: var(--gray-100); color: var(--gray-400); cursor: not-allowed; text-decoration: line-through; }
-  .slot-btn:disabled {
-  pointer-events: none;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #B99B64;
+  --gold-light: #f2ebdb;
+  --gold-dark: #9e8553;
+
+  --green: #004A41;
+  --green-light: #e0f2ef;
+  --green-dark: #003830;
+
+  --gray-100: #f7f7f5;
+  --gray-200: #ebebea;
+  --gray-400: #9b9a95;
+  --gray-700: #3d3d3a;
+  --gray-900: #1a1a18;
+
+  --red: #c0392b;
+  --radius: 10px;
 }
 
-.booked-slots {
-  margin-top: 14px;
-  padding: 12px 14px;
-  background: #fff7f7;
-  border: 1px solid #f0c6c6;
-  border-radius: 8px;
-  font-size: 13px;
-  color: var(--gray-700);
-  display: none;
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--gray-100);
+  color: var(--gray-900);
+  min-height: 100vh;
 }
 
-.booked-slots strong {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--red);
-  font-weight: 500;
-}
-
-.booked-slot-list {
+header {
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+  padding: 20px 24px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  gap: 16px;
 }
 
-.booked-slot-pill {
-  padding: 5px 9px;
-  border-radius: 999px;
-  background: #fbe4e4;
-  color: var(--red);
-  font-size: 12px;
-  text-decoration: line-through;
+.logo-placeholder {
+  width: 48px; height: 48px;
+  border: 1.5px dashed var(--gray-400);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
 }
-  .selected-info { background: var(--green-light); border: 1px solid #9fe1cb; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--green); font-weight: 500; margin-top: 16px; display: none; }
-  .loading-slots { text-align: center; padding: 20px; font-size: 13px; color: var(--gray-400); display: none; }
-  .btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; }
-  .btn { padding: 11px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
-  .btn-secondary { background: #fff; border-color: var(--gray-200); color: var(--gray-700); }
-  .btn-secondary:hover { border-color: var(--gray-700); }
-  .btn-primary { background: var(--blue); color: #fff; }
-  .btn-primary:hover { background: var(--blue-dark); }
-  .btn-primary:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
-  .success-screen { text-align: center; padding: 60px 24px; }
-  .success-icon { width: 64px; height: 64px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 28px; color: var(--green); }
-  .success-screen h2 { font-family: 'DM Serif Display', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; }
-  .success-screen p { font-size: 15px; color: var(--gray-400); line-height: 1.6; }
-  .summary-box { background: var(--gray-100); border-radius: 8px; padding: 16px; margin-top: 20px; text-align: left; font-size: 13px; }
-  .summary-box div { padding: 6px 0; border-bottom: 1px solid var(--gray-200); display: flex; justify-content: space-between; }
-  .summary-box div:last-child { border-bottom: none; }
-  .summary-box span:first-child { color: var(--gray-400); }
-  .summary-box span:last-child { font-weight: 500; }
-  .progress-bar { height: 3px; background: var(--gray-200); }
-  .progress-fill { height: 100%; background: var(--blue); transition: width 0.3s ease; }
-  .error-msg { font-size: 12px; color: var(--red); margin-top: 6px; display: none; }
-  @media (max-width: 480px) { .slots-grid { grid-template-columns: repeat(3, 1fr); } header h1 { font-size: 17px; } }
+
+header h1 {
+  font-family: 'DM Serif Display';
+  font-size: 20px;
+}
+
+.steps {
+  display: flex;
+  background: #fff;
+  border-bottom: 1px solid var(--gray-200);
+  padding: 0 24px;
+}
+
+.step-btn {
+  padding: 14px 20px;
+  font-size: 13px;
+  color: var(--gray-400);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.step-btn.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+
+.step-btn.done {
+  color: var(--green);
+}
+
+.step-btn.active .step-num {
+  background: var(--gold);
+  color: #fff;
+}
+
+.step-btn.done .step-num {
+  background: var(--green);
+  color: #fff;
+}
+
+.step-num {
+  display: inline-flex;
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  justify-content: center; align-items: center;
+  font-size: 11px;
+  margin-right: 8px;
+}
+
+.container { max-width: 680px; margin: auto; padding: 30px; }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 16px;
+}
+
+label { font-size: 13px; margin-bottom: 8px; display: block; }
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(185,155,100,0.15);
+}
+
+.rating-btn {
+  width: 44px; height: 44px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.rating-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+.rating-btn.selected {
+  background: var(--gold);
+  color: #fff;
+}
+
+.radio-option {
+  border: 1px solid var(--gray-200);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.radio-option:hover {
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
+
+.radio-option.selected {
+  border-color: var(--gold);
+  background: var(--gold-light);
+  color: var(--gold);
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--green);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--green-dark);
+}
+
+.btn-secondary {
+  border: 1px solid var(--gray-200);
+  background: #fff;
+}
+
+.cal-day:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.cal-day.selected {
+  background: var(--gold);
+  color: #fff;
+}
+
+.slot-btn.selected {
+  background: var(--gold);
+  color: #fff;
+}
+
+.progress-fill {
+  background: var(--gold);
+  height: 3px;
+}
+
 </style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo-placeholder">Logo<br>inst.</div>
+  <div class="logo-placeholder">Logo</div>
   <div>
     <h1>Denumire instituție</h1>
-    <p>Formular online · Acces public</p>
+    <p>Formular online</p>
   </div>
 </header>
 
-<div class="progress-bar">
-  <div class="progress-fill" id="progressFill" style="width:25%"></div>
-</div>
+<div class="progress-fill" style="width:25%"></div>
 
 <div class="steps">
-  <button class="step-btn active" onclick="goTo(0)" id="stepBtn0"><span class="step-num">1</span>Satisfacție</button>
-  <button class="step-btn" onclick="goTo(1)" id="stepBtn1"><span class="step-num">2</span>Inserție</button>
-  <button class="step-btn" onclick="goTo(2)" id="stepBtn2"><span class="step-num">3</span>GDPR</button>
-  <button class="step-btn" onclick="goTo(3)" id="stepBtn3"><span class="step-num">4</span>Programare</button>
+  <button class="step-btn active"><span class="step-num">1</span>Satisfacție</button>
+  <button class="step-btn"><span class="step-num">2</span>Inserție</button>
+  <button class="step-btn"><span class="step-num">3</span>GDPR</button>
+  <button class="step-btn"><span class="step-num">4</span>Programare</button>
 </div>
 
 <div class="container">
 
-  <!-- SECTIUNEA 1: Satisfactie -->
-  <div class="section active" id="sec0">
-    <h2 class="section-title">Chestionar de satisfacție</h2>
-    <p class="section-desc">Vă rugăm să evaluați experiența dumneavoastră cu serviciile noastre.</p>
-    <div class="card">
-      <div class="field">
-        <label>Cum evaluați în general serviciile instituției? <span class="req">*</span></label>
-        <div class="rating-group" id="rating1">
-          <button class="rating-btn" onclick="selectRating('rating1',this,1)">1</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,2)">2</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,3)">3</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,4)">4</button>
-          <button class="rating-btn" onclick="selectRating('rating1',this,5)">5</button>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-400);margin-top:6px;"><span>Foarte nemulțumit</span><span>Foarte mulțumit</span></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="field">
-        <label>Cum apreciați amabilitatea personalului? <span class="req">*</span></label>
-        <div class="rating-group" id="rating2">
-          <button class="rating-btn" onclick="selectRating('rating2',this,1)">1</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,2)">2</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,3)">3</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,4)">4</button>
-          <button class="rating-btn" onclick="selectRating('rating2',this,5)">5</button>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-400);margin-top:6px;"><span>Foarte nemulțumit</span><span>Foarte mulțumit</span></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="field">
-        <label>Cum apreciați timpul de așteptare?</label>
-        <div class="radio-group">
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="sub5"> Sub 5 minute</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="5-15"> 5–15 minute</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="15-30"> 15–30 minute</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="asteptare" value="peste30"> Peste 30 de minute</label>
-        </div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="field">
-        <label>Observații și sugestii</label>
-        <textarea id="obs" placeholder="Scrieți aici orice observație sau sugestie..."></textarea>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-primary" onclick="nextSection0()">Continuă →</button>
-    </div>
-  </div>
+<div class="card">
+<label>Evaluare</label>
+<div>
+<button class="rating-btn">1</button>
+<button class="rating-btn">2</button>
+<button class="rating-btn">3</button>
+<button class="rating-btn">4</button>
+<button class="rating-btn">5</button>
+</div>
+</div>
 
-  <!-- SECTIUNEA 2: Insertie -->
-  <div class="section" id="sec1">
-    <h2 class="section-title">Chestionar de inserție</h2>
-    <p class="section-desc">Informații despre integrarea dumneavoastră în cadrul instituției.</p>
-    <div class="card">
-      <div class="field">
-        <label>Numele și prenumele <span class="req">*</span></label>
-        <input type="text" id="ins_nume" placeholder="ex. Ionescu Maria">
-        <div class="error-msg" id="err_nume">Câmp obligatoriu</div>
-      </div>
-      <div class="field">
-        <label>Adresa de email <span class="req">*</span></label>
-        <input type="email" id="ins_email" placeholder="email@exemplu.ro">
-        <div class="error-msg" id="err_email">Câmp obligatoriu</div>
-      </div>
-      <div class="field">
-        <label>Număr de telefon</label>
-        <input type="tel" id="ins_telefon" placeholder="07xx xxx xxx">
-      </div>
-    </div>
-    <div class="card">
-      <div class="field">
-        <label>Categoria dumneavoastră <span class="req">*</span></label>
-        <div class="radio-group" id="rg_categorie">
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="student"> Student / Elev</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="absolvent"> Absolvent</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="angajat"> Angajat</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="extern"> Persoană externă</label>
-        </div>
-        <div class="error-msg" id="err_categorie">Selectați o categorie</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="field">
-        <label>Scopul vizitei / solicitării <span class="req">*</span></label>
-        <select id="ins_scop">
-          <option value="" disabled selected>Selectați scopul</option>
-          <option value="doc">Ridicare documente</option>
-          <option value="info">Informații generale</option>
-          <option value="inscriere">Înscriere</option>
-          <option value="reclamatie">Reclamație / sesizare</option>
-          <option value="altul">Altul</option>
-        </select>
-        <div class="error-msg" id="err_scop">Selectați scopul</div>
-      </div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goTo(0)">← Înapoi</button>
-      <button class="btn btn-primary" onclick="nextSection1()">Continuă →</button>
-    </div>
-  </div>
+<div class="card">
+<label>Nume</label>
+<input type="text">
+</div>
 
-  <!-- SECTIUNEA 3: GDPR -->
-  <div class="section" id="sec2">
-    <h2 class="section-title">Protecția datelor (GDPR)</h2>
-    <p class="section-desc">Vă rugăm să citiți și să acceptați termenii de prelucrare a datelor personale.</p>
-    <div class="card">
-      <div class="gdpr-box">
-        <h4>Informare privind prelucrarea datelor cu caracter personal</h4>
-        <p>În conformitate cu Regulamentul (UE) 2016/679 (GDPR), vă informăm că datele dumneavoastră cu caracter personal sunt prelucrate de [Denumire instituție], cu sediul în [Adresă], în calitate de operator.</p><br>
-        <p><strong>Scopul prelucrării:</strong> Datele colectate prin acest formular sunt utilizate exclusiv pentru gestionarea solicitărilor dumneavoastră și îmbunătățirea serviciilor oferite.</p><br>
-        <p><strong>Datele prelucrate:</strong> Nume, prenume, adresă de email, număr de telefon, categoria beneficiarului, scopul solicitării.</p><br>
-        <p><strong>Temeiul juridic:</strong> Consimțământul dumneavoastră explicit, exprimat prin bifarea căsuței de acord.</p><br>
-        <p><strong>Durata stocării:</strong> Datele vor fi stocate pe o perioadă de maxim 3 ani de la data colectării, după care vor fi șterse în mod securizat.</p><br>
-        <p><strong>Drepturile dumneavoastră:</strong> Aveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Pentru exercitarea acestor drepturi, contactați-ne la [email DPO].</p><br>
-        <p><strong>Transferuri:</strong> Datele nu sunt transferate către terți sau în afara UE.</p>
-      </div>
-      <label class="check-agree" id="gdprCheck1" onclick="toggleCheck(this, 'gdpr1')">
-        <input type="checkbox" id="gdpr1">
-        <span>Am citit și sunt de acord cu prelucrarea datelor mele cu caracter personal în scopurile descrise mai sus. <span style="color:var(--red)">*</span></span>
-      </label>
-      <label class="check-agree" id="gdprCheck2" onclick="toggleCheck(this, 'gdpr2')">
-        <input type="checkbox" id="gdpr2">
-        <span>Sunt de acord să fiu contactat/ă în legătură cu solicitarea mea prin email sau telefon. <span style="font-size:12px;color:var(--gray-400)">(opțional)</span></span>
-      </label>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goTo(1)">← Înapoi</button>
-      <button class="btn btn-primary" id="btnGdprNext" onclick="nextGdpr()" disabled>Continuă →</button>
-    </div>
-  </div>
-
-  <!-- SECTIUNEA 4: Programare -->
-  <div class="section" id="sec3">
-    <h2 class="section-title">Programare eliberare documente</h2>
-    <p class="section-desc">Alegeți data și ora dorită. Interval disponibil: 11:30 – 14:30, sloturi de 15 minute.</p>
-    <div class="card">
-      <div class="cal-nav">
-        <button onclick="prevMonth()">&#8249;</button>
-        <span class="cal-month" id="calMonth"></span>
-        <button onclick="nextMonth()">&#8250;</button>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div id="loadingSlots" class="loading-slots">Se încarcă sloturile disponibile...</div>
-      <div id="slotsSection" style="display:none">
-        <div class="slots-title" id="slotsTitle"></div>
-        <div class="slots-grid" id="slotsGrid"></div>
-      </div>
-      <div class="selected-info" id="selectedInfo"></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goTo(2)">← Înapoi</button>
-      <button class="btn btn-primary" id="btnSubmit" onclick="submitForm()" disabled>Trimite formularul</button>
-    </div>
-  </div>
-
-  <!-- SUCCESS -->
-  <div class="section" id="secSuccess">
-    <div class="success-screen">
-      <div class="success-icon">&#10003;</div>
-      <h2>Formular trimis cu succes!</h2>
-      <p>Vă mulțumim. Datele au fost înregistrate și veți fi contactat/ă în curând.</p>
-      <div class="summary-box" id="summaryBox"></div>
-    </div>
-  </div>
+<button class="btn btn-primary">Trimite</button>
 
 </div>
 
-<script>
-  var URL_GET_SLOTURI = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/961816dd63744a19abb1d43b8d0b448e/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hED2BfUx3cZAuDfwJtG40fH6aSLLNH9r8FWUADFeKF0';
-  var URL_POST_FORMULAR = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6d715b5c8d914ac7ac80d5ef08cb23fd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-O_lQBZSr5MBoOCK0_VmqhfENVhAcneMhirBTJ14rIQ';
-
-  var currentSection = 0;
-  var formData = {
-    rating1: null, rating2: null, timpAsteptare: '',
-    observatii: '', nume: '', email: '', telefon: '',
-    categorie: '', scop: '', gdpr1: false, gdpr2: false,
-    DataProgramare: null, OraProgramare: null
-  };
-
-  var calYear, calMonth;
-  var today = new Date(); today.setHours(0,0,0,0);
-  var months = ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
-
-  function init() {
-    calYear = today.getFullYear();
-    calMonth = today.getMonth();
-    renderCal();
-  }
-
-  function goTo(n) {
-    document.getElementById('sec' + currentSection).classList.remove('active');
-    currentSection = n;
-    document.getElementById('sec' + n).classList.add('active');
-    var btns = document.querySelectorAll('.step-btn');
-    for (var i = 0; i < 4; i++) {
-      btns[i].classList.remove('active');
-      if (i < n) btns[i].classList.add('done');
-      else btns[i].classList.remove('done');
-    }
-    btns[n].classList.add('active');
-    document.getElementById('progressFill').style.width = ((n + 1) * 25) + '%';
-    window.scrollTo(0, 0);
-  }
-
-  function selectRating(groupId, btn, val) {
-    document.getElementById(groupId).querySelectorAll('.rating-btn').forEach(function(b) { b.classList.remove('selected'); });
-    btn.classList.add('selected');
-    formData[groupId] = val;
-  }
-
-  function selectRadio(label) {
-    var name = label.querySelector('input').name;
-    document.querySelectorAll('input[name="' + name + '"]').forEach(function(inp) {
-      inp.closest('label').classList.remove('selected');
-    });
-    label.classList.add('selected');
-  }
-
-  function toggleCheck(label, id) {
-    var cb = document.getElementById(id);
-    cb.checked = !cb.checked;
-    label.classList.toggle('selected', cb.checked);
-    if (id === 'gdpr1') {
-      document.getElementById('btnGdprNext').disabled = !cb.checked;
-    }
-  }
-
-  function nextSection0() {
-    if (!formData.rating1 || !formData.rating2) {
-      alert('Vă rugăm să completați toate evaluările obligatorii.');
-      return;
-    }
-    formData.timpAsteptare = (document.querySelector('input[name="asteptare"]:checked') || {}).value || '';
-    formData.observatii = document.getElementById('obs').value;
-    goTo(1);
-  }
-
-  function nextSection1() {
-    var ok = true;
-    var nume = document.getElementById('ins_nume').value.trim();
-    var email = document.getElementById('ins_email').value.trim();
-    var categorie = (document.querySelector('input[name="categorie"]:checked') || {}).value || '';
-    var scop = document.getElementById('ins_scop').value;
-
-    document.getElementById('err_nume').style.display = nume ? 'none' : 'block';
-    document.getElementById('err_email').style.display = email ? 'none' : 'block';
-    document.getElementById('err_categorie').style.display = categorie ? 'none' : 'block';
-    document.getElementById('err_scop').style.display = scop ? 'none' : 'block';
-
-    if (!nume || !email || !categorie || !scop) return;
-
-    formData.nume = nume;
-    formData.email = email;
-    formData.telefon = document.getElementById('ins_telefon').value;
-    formData.categorie = categorie;
-    formData.scop = scop;
-    goTo(2);
-  }
-
-  function nextGdpr() {
-    if (!document.getElementById('gdpr1').checked) return;
-    formData.gdpr1 = true;
-    formData.gdpr2 = document.getElementById('gdpr2').checked;
-    goTo(3);
-  }
-
-  function renderCal() {
-    document.getElementById('calMonth').textContent = months[calMonth] + ' ' + calYear;
-    var grid = document.getElementById('calGrid');
-    grid.innerHTML = '';
-    ['Lu','Ma','Mi','Jo','Vi','Sâ','Du'].forEach(function(d) {
-      var h = document.createElement('div');
-      h.className = 'cal-head'; h.textContent = d;
-      grid.appendChild(h);
-    });
-    var first = new Date(calYear, calMonth, 1);
-    var startDay = (first.getDay() + 6) % 7;
-    for (var e = 0; e < startDay; e++) {
-      var empty = document.createElement('div');
-      empty.className = 'cal-day empty';
-      grid.appendChild(empty);
-    }
-    var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-    for (var day = 1; day <= daysInMonth; day++) {
-      var d = new Date(calYear, calMonth, day);
-      var isWeekend = d.getDay() === 0 || d.getDay() === 6;
-      var isPast = d < today;
-      var cell = document.createElement('div');
-      cell.className = 'cal-day' + (isPast || isWeekend ? ' past' : '') + (d.getTime() === today.getTime() ? ' today' : '');
-      cell.textContent = day;
-      if (!isPast && !isWeekend) {
-        (function(dd, cc) { cc.onclick = function() { selectDay(dd, cc); }; })(d, cell);
-      }
-      grid.appendChild(cell);
-    }
-  }
-
-  function selectDay(date, cell) {
-    document.querySelectorAll('.cal-day').forEach(function(c) { c.classList.remove('selected'); });
-    cell.classList.add('selected');
-    formData.DataProgramare = date;
-    formData.OraProgramare = null;
-    document.getElementById('selectedInfo').style.display = 'none';
-    document.getElementById('btnSubmit').disabled = true;
-    loadSloturi(date);
-  }
-
-function loadSloturi(date) {
-  var section = document.getElementById('slotsSection');
-  var loading = document.getElementById('loadingSlots');
-
-  section.style.display = 'none';
-  loading.style.display = 'block';
-
-  var dateStr = date.getFullYear() + '-' +
-    String(date.getMonth() + 1).padStart(2, '0') + '-' +
-    String(date.getDate()).padStart(2, '0');
-
-  fetch(URL_GET_SLOTURI, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ data: dateStr })
-  })
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    console.log('RASPUNS:', JSON.stringify(data));
-
-    loading.style.display = 'none';
-
-    var ocupate = [];
-    var sloturi = [];
-
-    // Accepta atat array direct, cat si string JSON din Power Automate
-    if (data && Array.isArray(data.sloturi)) {
-      sloturi = data.sloturi;
-    } else if (data && typeof data.sloturi === 'string') {
-      try {
-        sloturi = JSON.parse(data.sloturi);
-      } catch (e) {
-        console.error('Eroare parsare data.sloturi:', e);
-        sloturi = [];
-      }
-    } else if (Array.isArray(data)) {
-      sloturi = data;
-    }
-
-    sloturi.forEach(function(item, index) {
-      if (item && item.OraProgramare) {
-        var dt = new Date(item.OraProgramare);
-
-        var dataConvertita = dt.toLocaleDateString('en-CA', {
-          timeZone: 'Europe/Bucharest'
-        });
-
-        var oraConvertita = dt.toLocaleTimeString('ro-RO', {
-          timeZone: 'Europe/Bucharest',
-          hour: '2-digit',
-          minute: '2-digit',
-          hour12: false
-        });
-
-        console.log('SLOT CONVERTIT #' + (index + 1), {
-          OraProgramareOriginal: item.OraProgramare,
-          dataConvertitaRomania: dataConvertita,
-          oraConvertitaRomania: oraConvertita
-        });
-
-        if (dataConvertita === dateStr) {
-          ocupate.push(oraConvertita);
-        }
-      }
-    });
-
-    ocupate = ocupate.filter(function(value, index, self) {
-      return self.indexOf(value) === index;
-    });
-
-    console.log('Sloturi ocupate pentru ' + dateStr + ':', ocupate);
-
-    renderSlots(date, ocupate);
-  })
-  .catch(function(err) {
-    console.error('Eroare la incarcarea sloturilor:', err);
-    loading.style.display = 'none';
-    renderSlots(date, []);
-  });
-}
-
-  function renderSlots(date, ocupate) {
-    var section = document.getElementById('slotsSection');
-    var title = document.getElementById('slotsTitle');
-    var grid = document.getElementById('slotsGrid');
-    title.textContent = 'Ore disponibile — ' + date.getDate() + ' ' + months[date.getMonth()];
-    grid.innerHTML = '';
-
-    var slots = [];
-    var h = 11, min = 30;
-    while (h < 14 || (h === 14 && min <= 30)) {
-      slots.push((h < 10 ? '0' : '') + h + ':' + (min === 0 ? '00' : min));
-      min += 15;
-      if (min >= 60) { h++; min = 0; }
-    }
-
-    slots.forEach(function(slot) {
-      var taken = ocupate.indexOf(slot) > -1;
-      var btn = document.createElement('button');
-      btn.className = 'slot-btn' + (taken ? ' taken' : '');
-      btn.textContent = slot;
-      if (!taken) {
-        btn.onclick = function() { selectSlot(slot, btn, date); };
-      }
-      grid.appendChild(btn);
-    });
-
-    section.style.display = 'block';
-  }
-
-  function selectSlot(slot, btn, date) {
-    document.querySelectorAll('.slot-btn').forEach(function(b) { b.classList.remove('selected'); });
-    btn.classList.add('selected');
-    formData.OraProgramare = slot;
-    var info = document.getElementById('selectedInfo');
-    info.textContent = 'Programare selectată: ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() + ', ora ' + slot;
-    info.style.display = 'block';
-    document.getElementById('btnSubmit').disabled = false;
-  }
-
-  function prevMonth() {
-    calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
-    renderCal();
-    document.getElementById('slotsSection').style.display = 'none';
-    document.getElementById('loadingSlots').style.display = 'none';
-  }
-
-  function nextMonth() {
-    calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
-    renderCal();
-    document.getElementById('slotsSection').style.display = 'none';
-    document.getElementById('loadingSlots').style.display = 'none';
-  }
-
-  function submitForm() {
-    if (!formData.DataProgramare || !formData.OraProgramare) return;
-    document.getElementById('btnSubmit').disabled = true;
-    document.getElementById('btnSubmit').textContent = 'Se trimite...';
-
-    var dateStr = formData.DataProgramare.getFullYear() + '-' +
-      String(formData.DataProgramare.getMonth() + 1).padStart(2, '0') + '-' +
-      String(formData.DataProgramare.getDate()).padStart(2, '0');
-
-    var payload = {
-      nume: formData.nume,
-      email: formData.email,
-      telefon: formData.telefon,
-      categorie: formData.categorie,
-      scop: formData.scop,
-      rating1: formData.rating1,
-      rating2: formData.rating2,
-      timpAsteptare: formData.timpAsteptare,
-      observatii: formData.observatii,
-      DataProgramare: dateStr,
-      OraProgramare: formData.OraProgramare,
-      gdpr: formData.gdpr1
-    };
-
-    fetch(URL_POST_FORMULAR, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    })
-    .then(function() { showSuccess(dateStr); })
-    .catch(function() { showSuccess(dateStr); });
-  }
-
-  function showSuccess(dateStr) {
-    var summary = document.getElementById('summaryBox');
-    summary.innerHTML =
-      '<div><span>Nume</span><span>' + formData.nume + '</span></div>' +
-      '<div><span>Email</span><span>' + formData.email + '</span></div>' +
-      '<div><span>Data programării</span><span>' + formData.DataProgramare.getDate() + ' ' + months[formData.DataProgramare.getMonth()] + ' ' + formData.DataProgramare.getFullYear() + '</span></div>' +
-      '<div><span>Ora</span><span>' + formData.OraProgramare + '</span></div>';
-    document.getElementById('sec3').classList.remove('active');
-    document.getElementById('secSuccess').classList.add('active');
-    document.getElementById('progressFill').style.width = '100%';
-    window.scrollTo(0, 0);
-  }
-
-  init();
-</script>
 </body>
 </html>
