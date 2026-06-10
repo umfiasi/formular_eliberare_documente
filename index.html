@@ -143,7 +143,7 @@
 
 <div class="steps">
   <button class="step-btn active" onclick="goTo(0)" id="stepBtn0"><span class="step-num">1</span>Satisfacție</button>
-  <button class="step-btn" onclick="goTo(1)" id="stepBtn1"><span class="step-num">2</span>Inserție</button>
+  <button class="step-btn" onclick="goTo(1)" id="stepBtn1"><span class="step-num">2</span>Inserție prof.</button>
   <button class="step-btn" onclick="goTo(2)" id="stepBtn2"><span class="step-num">3</span>GDPR</button>
   <button class="step-btn" onclick="goTo(3)" id="stepBtn3"><span class="step-num">4</span>Programare</button>
 </div>
@@ -347,55 +347,115 @@
     </div>
   </div>
 
-  <!-- SECTIUNEA 2: Insertie -->
+  <!-- SECTIUNEA 2: Insertie Profesionala -->
   <div class="section" id="sec1">
-    <h2 class="section-title">Chestionar de inserție</h2>
-    <p class="section-desc">Informații despre integrarea dumneavoastră în cadrul instituției.</p>
+    <h2 class="section-title">Chestionar de inserție profesională</h2>
+    <p class="section-desc">Acest chestionar cuprinde întrebări care se referă la etapa prezentă din cariera dumneavoastră, precum și planurile de viitor în carieră. Toate câmpurile sunt obligatorii.</p>
+
+    <!-- IP Q1: Facultate / Specializare / Promotie -->
     <div class="card">
+      <div class="q-header"><span class="q-num">1</span><span class="q-label">Date despre studii <span style="color:var(--red)">*</span></span></div>
       <div class="field">
-        <label>Numele și prenumele <span class="req">*</span></label>
-        <input type="text" id="ins_nume" placeholder="ex. Ionescu Maria">
-        <div class="error-msg" id="err_nume">Câmp obligatoriu</div>
+        <label>Facultatea absolvită <span class="req">*</span></label>
+        <input type="text" id="ip_facultate" placeholder="ex. Facultatea de Medicină">
+        <div class="error-msg" id="err_ip_facultate">Câmp obligatoriu</div>
       </div>
       <div class="field">
-        <label>Adresa de email <span class="req">*</span></label>
-        <input type="email" id="ins_email" placeholder="email@exemplu.ro">
-        <div class="error-msg" id="err_email">Câmp obligatoriu</div>
+        <label>Specializarea <span class="req">*</span></label>
+        <input type="text" id="ip_specializare" placeholder="ex. Medicină Generală">
+        <div class="error-msg" id="err_ip_specializare">Câmp obligatoriu</div>
       </div>
       <div class="field">
-        <label>Număr de telefon</label>
-        <input type="tel" id="ins_telefon" placeholder="07xx xxx xxx">
+        <label>Promoția <span class="req">*</span></label>
+        <input type="text" id="ip_promotie" placeholder="ex. 2023">
+        <div class="error-msg" id="err_ip_promotie">Câmp obligatoriu</div>
       </div>
     </div>
+
+    <!-- IP Q2: Domeniu licentiat -->
     <div class="card">
-      <div class="field">
-        <label>Categoria dumneavoastră <span class="req">*</span></label>
-        <div class="radio-group" id="rg_categorie">
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="student"> Student / Elev</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="absolvent"> Absolvent</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="angajat"> Angajat</label>
-          <label class="radio-option" onclick="selectRadio(this)"><input type="radio" name="categorie" value="extern"> Persoană externă</label>
-        </div>
-        <div class="error-msg" id="err_categorie">Selectați o categorie</div>
+      <div class="q-header"><span class="q-num">2</span><span class="q-label">După absolvirea facultății, sunteți licențiat(ă) în domeniul <span style="color:var(--red)">*</span></span></div>
+      <div class="prog-list" id="ip_domeniu_list">
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Medicină')"><input type="radio" name="ip_domeniu"> Medicină</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Medicină Dentară')"><input type="radio" name="ip_domeniu"> Medicină Dentară</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Farmacie')"><input type="radio" name="ip_domeniu"> Farmacie</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Bioinginerie')"><input type="radio" name="ip_domeniu"> Bioinginerie</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Asistență Medicală Generală')"><input type="radio" name="ip_domeniu"> Asistență Medicală Generală</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Nutriție și Dietetică')"><input type="radio" name="ip_domeniu"> Nutriție și Dietetică</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Radiologie și Imagistică Medicală')"><input type="radio" name="ip_domeniu"> Radiologie și Imagistică</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Tehnică Dentară')"><input type="radio" name="ip_domeniu"> Tehnică Dentară</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Asistență de profilaxie stomatologică')"><input type="radio" name="ip_domeniu"> Asistență de profilaxie stomatologică</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Balneofiziokinetoterapie și recuperare')"><input type="radio" name="ip_domeniu"> Balneofiziokinetoterapie și recuperare</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Cosmetică medicală și tehnologia produsului cosmetic')"><input type="radio" name="ip_domeniu"> Cosmetică medicală</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Chimie medicală')"><input type="radio" name="ip_domeniu"> Chimie medicală</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Masterat în Domeniul Medicină')"><input type="radio" name="ip_domeniu"> Masterat – Medicină</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Masterat în Domeniul Medicină Dentară')"><input type="radio" name="ip_domeniu"> Masterat – Medicină Dentară</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Masterat în Domeniul Farmacie')"><input type="radio" name="ip_domeniu"> Masterat – Farmacie</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Masterat în Domeniul Științe Inginerești aplicate')"><input type="radio" name="ip_domeniu"> Masterat – Științe Inginerești</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Doctorat în Domeniul Medicină')"><input type="radio" name="ip_domeniu"> Doctorat – Medicină</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Doctorat în Domeniul Medicină Dentară')"><input type="radio" name="ip_domeniu"> Doctorat – Medicină Dentară</label>
+        <label class="prog-opt" onclick="selectProgIn('ip_domeniu_list','ip_domeniu',this,'Doctorat în Domeniul Farmacie')"><input type="radio" name="ip_domeniu"> Doctorat – Farmacie</label>
       </div>
+      <div class="error-msg" id="err_ip_domeniu">Selectați domeniul</div>
     </div>
+
+    <!-- IP Q3: Angajator -->
     <div class="card">
-      <div class="field">
-        <label>Scopul vizitei / solicitării <span class="req">*</span></label>
-        <select id="ins_scop">
-          <option value="" disabled selected>Selectați scopul</option>
-          <option value="doc">Ridicare documente</option>
-          <option value="info">Informații generale</option>
-          <option value="inscriere">Înscriere</option>
-          <option value="reclamatie">Reclamație / sesizare</option>
-          <option value="altul">Altul</option>
-        </select>
-        <div class="error-msg" id="err_scop">Selectați scopul</div>
+      <div class="q-header"><span class="q-num">3</span><span class="q-label">În momentul de față, sunteți angajat(ă) în cadrul unui <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="ip_angajator_group">
+        <label class="scale-opt" onclick="selectIPAngajator(this,'Spital / Ambulator / Angajat în sistemul privat din România')"><input type="radio" name="ip_angajator"><span></span>Spital / Ambulator / Angajat în sistemul privat din România</label>
+        <label class="scale-opt" onclick="selectIPAngajator(this,'Spital / Ambulator / Angajat în sistemul public din România')"><input type="radio" name="ip_angajator"><span></span>Spital / Ambulator / Angajat în sistemul public din România</label>
+        <label class="scale-opt ip-has-detail" onclick="selectIPAngajator(this,'Spital / Ambulator / Altele în străinătate')"><input type="radio" name="ip_angajator"><span></span>Spital / Ambulator / Altele în străinătate</label>
+        <label class="scale-opt" onclick="selectIPAngajator(this,'Angajat temporar în cadrul unor proiecte naționale / europene sau altele')"><input type="radio" name="ip_angajator"><span></span>Angajat temporar în cadrul unor proiecte naționale / europene sau altele</label>
+        <label class="scale-opt" onclick="selectIPAngajator(this,'Școli')"><input type="radio" name="ip_angajator"><span></span>Școli</label>
+        <label class="scale-opt" onclick="selectIPAngajator(this,'Baze de recuperare / Club sportiv')"><input type="radio" name="ip_angajator"><span></span>Baze de recuperare / Club sportiv</label>
+        <label class="scale-opt" onclick="selectIPAngajator(this,'Nu sunt angajat')"><input type="radio" name="ip_angajator"><span></span>Nu sunt angajat</label>
+        <label class="scale-opt ip-has-detail" onclick="selectIPAngajator(this,'Altele')"><input type="radio" name="ip_angajator"><span></span>Altele</label>
       </div>
+      <div id="ip_angajator_detail_box" style="display:none; margin-top:12px;">
+        <input type="text" id="ip_angajator_detail" placeholder="Vă rugăm specificați (țara, public / privat sau alte detalii)">
+      </div>
+      <div class="error-msg" id="err_ip_angajator">Selectați o opțiune</div>
     </div>
+
+    <!-- IP Q4: Post -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">4</span><span class="q-label">Postul pe care sunteți angajat(ă) în prezent este cel de <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="ip_post_group">
+        <label class="scale-opt" onclick="selectIPPost(this,'Medic rezident')"><input type="radio" name="ip_post"><span></span>Medic rezident</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Medic stomatolog / dentist')"><input type="radio" name="ip_post"><span></span>Medic stomatolog / dentist</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Farmacist')"><input type="radio" name="ip_post"><span></span>Farmacist</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Asistent medical')"><input type="radio" name="ip_post"><span></span>Asistent medical</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Asistent radiologie')"><input type="radio" name="ip_post"><span></span>Asistent radiologie</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Bioinginer')"><input type="radio" name="ip_post"><span></span>Bioinginer</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Fiziokinetoterapeut')"><input type="radio" name="ip_post"><span></span>Fiziokinetoterapeut</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Nutriționist')"><input type="radio" name="ip_post"><span></span>Nutriționist</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Asistent profilaxie stomatologică')"><input type="radio" name="ip_post"><span></span>Asistent profilaxie stomatologică</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Cosmetician')"><input type="radio" name="ip_post"><span></span>Cosmetician</label>
+        <label class="scale-opt" onclick="selectIPPost(this,'Chimist')"><input type="radio" name="ip_post"><span></span>Chimist</label>
+        <label class="scale-opt ip-has-detail" onclick="selectIPPost(this,'Altele')"><input type="radio" name="ip_post"><span></span>Altele</label>
+      </div>
+      <div id="ip_post_detail_box" style="display:none; margin-top:12px;">
+        <input type="text" id="ip_post_detail" placeholder="Precizați postul">
+      </div>
+      <div class="error-msg" id="err_ip_post">Selectați o opțiune</div>
+    </div>
+
+    <!-- IP Q5: Alumni -->
+    <div class="card">
+      <div class="q-header"><span class="q-num">5</span><span class="q-label">Vă doriți ca după absolvire să deveniți membru(ă) al/a comunității Alumni a UMF „Grigore T. Popa" din Iași, în scopul accesului la informații referitoare la alumni, manifestări științifice, programe de educație postuniversitară etc.? <span style="color:var(--red)">*</span></span></div>
+      <div class="scale-options" id="ip_alumni_group">
+        <label class="scale-opt" onclick="selectIPAlumni(this,'Da')"><input type="radio" name="ip_alumni"><span></span>
+          Da &nbsp;<a href="#" onclick="event.stopPropagation(); openLink('https://alumni.umfiasi.ro')" style="font-size:12px; color:var(--gold); text-decoration:underline;">↗ Accesați pagina Alumni</a>
+        </label>
+        <label class="scale-opt" onclick="selectIPAlumni(this,'Nu')"><input type="radio" name="ip_alumni"><span></span>Nu</label>
+      </div>
+      <div class="error-msg" id="err_ip_alumni">Selectați o opțiune</div>
+    </div>
+
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="goTo(0)">← Înapoi</button>
-      <button class="btn btn-primary" onclick="nextSection1()">Continuă →</button>
+      <button class="btn btn-primary" onclick="nextSectionIP()">Continuă →</button>
     </div>
   </div>
 
@@ -524,6 +584,66 @@
     label.classList.add('selected');
   }
 
+  var ipAngajatorVal = '';
+  var ipPostVal = '';
+  var ipAlumniVal = '';
+
+  function selectProgIn(listId, fieldId, label, val) {
+    document.getElementById(listId).querySelectorAll('.prog-opt').forEach(function(l) { l.classList.remove('selected'); });
+    label.classList.add('selected');
+    window[fieldId + '_val'] = val;
+  }
+
+  function selectIPAngajator(label, val) {
+    document.getElementById('ip_angajator_group').querySelectorAll('.scale-opt').forEach(function(l) { l.classList.remove('selected'); });
+    label.classList.add('selected');
+    ipAngajatorVal = val;
+    var needDetail = label.classList.contains('ip-has-detail');
+    document.getElementById('ip_angajator_detail_box').style.display = needDetail ? 'block' : 'none';
+  }
+
+  function selectIPPost(label, val) {
+    document.getElementById('ip_post_group').querySelectorAll('.scale-opt').forEach(function(l) { l.classList.remove('selected'); });
+    label.classList.add('selected');
+    ipPostVal = val;
+    var needDetail = label.classList.contains('ip-has-detail');
+    document.getElementById('ip_post_detail_box').style.display = needDetail ? 'block' : 'none';
+  }
+
+  function selectIPAlumni(label, val) {
+    document.getElementById('ip_alumni_group').querySelectorAll('.scale-opt').forEach(function(l) { l.classList.remove('selected'); });
+    label.classList.add('selected');
+    ipAlumniVal = val;
+  }
+
+  function nextSectionIP() {
+    var facultate = document.getElementById('ip_facultate').value.trim();
+    var specializare = document.getElementById('ip_specializare').value.trim();
+    var promotie = document.getElementById('ip_promotie').value.trim();
+    var domeniu = (document.querySelector('input[name="ip_domeniu"]:checked') || {}).value || '';
+
+    document.getElementById('err_ip_facultate').style.display = facultate ? 'none' : 'block';
+    document.getElementById('err_ip_specializare').style.display = specializare ? 'none' : 'block';
+    document.getElementById('err_ip_promotie').style.display = promotie ? 'none' : 'block';
+    document.getElementById('err_ip_domeniu').style.display = domeniu ? 'none' : 'block';
+    document.getElementById('err_ip_angajator').style.display = ipAngajatorVal ? 'none' : 'block';
+    document.getElementById('err_ip_post').style.display = ipPostVal ? 'none' : 'block';
+    document.getElementById('err_ip_alumni').style.display = ipAlumniVal ? 'none' : 'block';
+
+    if (!facultate || !specializare || !promotie || !domeniu || !ipAngajatorVal || !ipPostVal || !ipAlumniVal) return;
+
+    formData.ip_facultate = facultate;
+    formData.ip_specializare = specializare;
+    formData.ip_promotie = promotie;
+    formData.ip_domeniu = domeniu;
+    formData.ip_angajator = ipAngajatorVal;
+    formData.ip_angajator_detail = document.getElementById('ip_angajator_detail').value;
+    formData.ip_post = ipPostVal;
+    formData.ip_post_detail = document.getElementById('ip_post_detail').value;
+    formData.ip_alumni = ipAlumniVal;
+    goTo(2);
+  }
+
   function toggleCheck(label, id) {
     var cb = document.getElementById(id);
     cb.checked = !cb.checked;
@@ -551,27 +671,6 @@
     formData.scaleAnswers = JSON.parse(JSON.stringify(scaleAnswers));
     formData.propuneri = document.getElementById('propuneri').value;
     goTo(1);
-  }
-
-  function nextSection1() {
-    var nume = document.getElementById('ins_nume').value.trim();
-    var email = document.getElementById('ins_email').value.trim();
-    var categorie = (document.querySelector('input[name="categorie"]:checked') || {}).value || '';
-    var scop = document.getElementById('ins_scop').value;
-
-    document.getElementById('err_nume').style.display = nume ? 'none' : 'block';
-    document.getElementById('err_email').style.display = email ? 'none' : 'block';
-    document.getElementById('err_categorie').style.display = categorie ? 'none' : 'block';
-    document.getElementById('err_scop').style.display = scop ? 'none' : 'block';
-
-    if (!nume || !email || !categorie || !scop) return;
-
-    formData.nume = nume;
-    formData.email = email;
-    formData.telefon = document.getElementById('ins_telefon').value;
-    formData.categorie = categorie;
-    formData.scop = scop;
-    goTo(2);
   }
 
   function nextGdpr() {
@@ -731,6 +830,15 @@
       program: formData.program,
       raspunsuri: formData.scaleAnswers,
       propuneri: formData.propuneri,
+      ip_facultate: formData.ip_facultate,
+      ip_specializare: formData.ip_specializare,
+      ip_promotie: formData.ip_promotie,
+      ip_domeniu: formData.ip_domeniu,
+      ip_angajator: formData.ip_angajator,
+      ip_angajator_detail: formData.ip_angajator_detail,
+      ip_post: formData.ip_post,
+      ip_post_detail: formData.ip_post_detail,
+      ip_alumni: formData.ip_alumni,
       DataProgramare: dateStr,
       OraProgramare: formData.OraProgramare,
       gdpr: formData.gdpr1
