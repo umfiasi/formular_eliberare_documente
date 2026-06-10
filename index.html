@@ -147,8 +147,8 @@
   <button class="step-btn active" id="stepBtn0"><span class="step-num">1</span>Satisfacție <span style="font-size:10px; opacity:0.6; margin-left:4px;">· anonim</span></button>
   <div class="steps-divider"></div>
   <button class="step-btn" id="stepBtn1"><span class="step-num">2</span>Inserție prof.</button>
-  <button class="step-btn" id="stepBtn2"><span class="step-num">3</span>GDPR</button>
-  <button class="step-btn" id="stepBtn3"><span class="step-num">4</span>Programare</button>
+  <button class="step-btn" id="stepBtn2"><span class="step-num">3</span>Succes</button>
+  
 </div>
 
 <div class="container">
@@ -467,59 +467,8 @@
     </div>
   </div>
 
-  <!-- SECTIUNEA 3: GDPR -->
-  <div class="section" id="sec2">
-    <h2 class="section-title">Protecția datelor (GDPR)</h2>
-    <p class="section-desc">Vă rugăm să citiți și să acceptați termenii de prelucrare a datelor personale.</p>
-    <div class="card">
-      <div class="gdpr-box">
-        <h4>Informare privind prelucrarea datelor cu caracter personal</h4>
-        <p>În conformitate cu Regulamentul (UE) 2016/679 (GDPR), vă informăm că datele dumneavoastră cu caracter personal sunt prelucrate de UMF „Grigore T. Popa" Iași, cu sediul în Str. Universității nr. 16, Iași, în calitate de operator.</p><br>
-        <p><strong>Scopul prelucrării:</strong> Datele colectate prin acest formular sunt utilizate exclusiv pentru gestionarea solicitărilor dumneavoastră și îmbunătățirea serviciilor oferite.</p><br>
-        <p><strong>Datele prelucrate:</strong> Nume, prenume, adresă de email, număr de telefon, categoria beneficiarului, scopul solicitării.</p><br>
-        <p><strong>Temeiul juridic:</strong> Consimțământul dumneavoastră explicit, exprimat prin bifarea căsuței de acord.</p><br>
-        <p><strong>Durata stocării:</strong> Datele vor fi stocate pe o perioadă de maxim 3 ani de la data colectării, după care vor fi șterse în mod securizat.</p><br>
-        <p><strong>Drepturile dumneavoastră:</strong> Aveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Pentru exercitarea acestor drepturi, contactați-ne la adresa DPO a universității.</p><br>
-        <p><strong>Transferuri:</strong> Datele nu sunt transferate către terți sau în afara UE.</p>
-      </div>
-      <label class="check-agree" id="gdprCheck1" onclick="toggleCheck(this, 'gdpr1')">
-        <input type="checkbox" id="gdpr1">
-        <span>Am citit și sunt de acord cu prelucrarea datelor mele cu caracter personal în scopurile descrise mai sus. <span style="color:var(--red)">*</span></span>
-      </label>
-      <label class="check-agree" id="gdprCheck2" onclick="toggleCheck(this, 'gdpr2')">
-        <input type="checkbox" id="gdpr2">
-        <span>Sunt de acord să fiu contactat/ă în legătură cu solicitarea mea prin email sau telefon. <span style="font-size:12px;color:var(--gray-400)">(opțional)</span></span>
-      </label>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goTo(1)">← Înapoi</button>
-      <button class="btn btn-primary" id="btnGdprNext" onclick="nextGdpr()" disabled>Continuă →</button>
-    </div>
-  </div>
-
-  <!-- SECTIUNEA 4: Programare -->
-  <div class="section" id="sec3">
-    <h2 class="section-title">Programare eliberare documente</h2>
-    <p class="section-desc">Alegeți data și ora dorită. Interval disponibil: 11:30 – 14:30, sloturi de 15 minute.</p>
-    <div class="card">
-      <div class="cal-nav">
-        <button onclick="prevMonth()">&#8249;</button>
-        <span class="cal-month" id="calMonth"></span>
-        <button onclick="nextMonth()">&#8250;</button>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div id="loadingSlots" class="loading-slots">Se încarcă sloturile disponibile...</div>
-      <div id="slotsSection" style="display:none">
-        <div class="slots-title" id="slotsTitle"></div>
-        <div class="slots-grid" id="slotsGrid"></div>
-      </div>
-      <div class="selected-info" id="selectedInfo"></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goTo(2)">← Înapoi</button>
-      <button class="btn btn-primary" id="btnSubmit" onclick="submitForm()" disabled>Trimite formularul</button>
-    </div>
-  </div>
+  
+ 
 
   <!-- SUCCESS -->
   <div class="section" id="secSuccess">
