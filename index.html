@@ -15,19 +15,16 @@
     --radius: 10px;
   }
   body { font-family: 'DM Sans', sans-serif; background: var(--gray-100); color: var(--gray-900); min-height: 100vh; padding: 0 0 60px; }
-  header { background: var(--green); padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
-  .logo-placeholder { width: 52px; height: 52px; border: 1.5px solid rgba(185,155,100,0.5); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--gold); text-align: center; line-height: 1.3; }
-  header h1 { font-family: 'DM Serif Display', serif; font-size: 18px; font-weight: 400; color: #fff; }
-  header p { font-size: 13px; color: var(--gold); margin-top: 3px; }
   .steps { display: flex; background: var(--green-dark); overflow-x: auto; padding: 0 24px; align-items: stretch; }
-  .steps-divider { width: 1px; background: rgba(255,255,255,0.15); margin: 10px 4px; flex-shrink: 0; position: relative; }
-  
+  .steps-divider { width: 1px; background: rgba(255,255,255,0.15); margin: 10px 4px; flex-shrink: 0; }
   .step-btn { padding: 14px 20px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 400; color: rgba(255,255,255,0.5); background: none; border: none; border-bottom: 2px solid transparent; cursor: default; white-space: nowrap; pointer-events: none; }
   .step-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 500; }
   .step-btn.done { color: rgba(185,155,100,0.7); }
   .step-num { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); font-size: 11px; font-weight: 500; margin-right: 8px; }
   .step-btn.active .step-num { background: var(--gold); color: var(--green-dark); }
   .step-btn.done .step-num { background: rgba(185,155,100,0.4); color: #fff; }
+  .progress-bar { height: 3px; background: rgba(255,255,255,0.2); background-color: var(--green-dark); }
+  .progress-fill { height: 100%; background: var(--gold); transition: width 0.3s ease; }
   .container { max-width: 700px; margin: 0 auto; padding: 32px 16px 0; }
   .section { display: none; }
   .section.active { display: block; }
@@ -45,8 +42,6 @@
   input[type=text], input[type=email], input[type=tel], select, textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--gray-900); background: #fff; outline: none; transition: border-color 0.15s; }
   input:focus, select:focus, textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(185,155,100,0.12); }
   textarea { resize: vertical; min-height: 90px; }
-
-  /* Optiuni cu cifre (scala) */
   .scale-options { display: flex; flex-direction: column; gap: 8px; }
   .scale-opt { display: flex; align-items: center; gap: 12px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 14px; }
   .scale-opt:hover { border-color: var(--gold); background: var(--gold-light); }
@@ -54,60 +49,23 @@
   .scale-opt input[type=radio] { accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0; }
   .scale-badge { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--gray-200); font-size: 12px; font-weight: 600; color: var(--gray-400); flex-shrink: 0; transition: all 0.15s; }
   .scale-opt.selected .scale-badge { background: var(--gold); border-color: var(--gold); color: #fff; }
-
-  /* Program dropdown - lista programe */
   .prog-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
   .prog-opt { display: flex; align-items: center; gap: 8px; padding: 9px 12px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; font-size: 13px; transition: all 0.15s; }
   .prog-opt:hover { border-color: var(--gold); background: var(--gold-light); }
   .prog-opt.selected { border-color: var(--gold); background: var(--gold-light); color: var(--green); font-weight: 500; }
   .prog-opt input { accent-color: var(--gold); width: 15px; height: 15px; flex-shrink: 0; }
-
-  /* Sectiunea 2 - Insertie */
   .radio-group { display: flex; flex-direction: column; gap: 10px; }
   .radio-option { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; transition: all 0.15s; font-size: 14px; }
   .radio-option:hover { border-color: var(--gold); background: var(--gold-light); }
   .radio-option.selected { border-color: var(--gold); background: var(--gold-light); color: var(--green); font-weight: 500; }
   .radio-option input { accent-color: var(--gold); width: 16px; height: 16px; }
-
-  /* GDPR */
-  .gdpr-box { background: var(--gray-100); border: 1px solid var(--gray-200); border-radius: 8px; padding: 16px; font-size: 13px; color: var(--gray-700); line-height: 1.7; margin-bottom: 16px; max-height: 200px; overflow-y: auto; }
-  .gdpr-box h4 { font-size: 13px; font-weight: 500; margin-bottom: 8px; color: var(--gray-900); }
-  .check-agree { display: flex; align-items: flex-start; gap: 10px; padding: 14px; border: 1px solid var(--gray-200); border-radius: 8px; cursor: pointer; font-size: 13px; line-height: 1.5; margin-bottom: 12px; }
-  .check-agree input { accent-color: var(--gold); width: 16px; height: 16px; margin-top: 1px; flex-shrink: 0; }
-  .check-agree.selected { border-color: var(--gold); background: var(--gold-light); }
-
-  /* Calendar */
-  .cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
-  .cal-nav button { width: 32px; height: 32px; border: 1px solid var(--gray-200); border-radius: 6px; background: #fff; cursor: pointer; font-size: 16px; color: var(--gray-700); display: flex; align-items: center; justify-content: center; }
-  .cal-nav button:hover { border-color: var(--gold); color: var(--gold); }
-  .cal-month { font-weight: 500; font-size: 15px; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 20px; }
-  .cal-head { text-align: center; font-size: 12px; color: var(--gray-400); padding: 6px 0; }
-  .cal-day { text-align: center; padding: 8px 4px; border-radius: 6px; font-size: 14px; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
-  .cal-day:hover:not(.empty):not(.past) { border-color: var(--gold); color: var(--gold); }
-  .cal-day.empty { cursor: default; }
-  .cal-day.past { color: var(--gray-400); cursor: not-allowed; }
-  .cal-day.selected { background: var(--green); color: #fff; border-color: var(--green); }
-  .cal-day.today { font-weight: 500; }
-  .slots-title { font-size: 13px; font-weight: 500; color: var(--gray-700); margin-bottom: 12px; }
-  .slots-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
-  .slot-btn { padding: 10px 6px; border: 1px solid var(--gray-200); border-radius: 8px; background: #fff; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--gray-700); cursor: pointer; text-align: center; transition: all 0.15s; }
-  .slot-btn:hover:not(.taken) { border-color: var(--gold); color: var(--gold); }
-  .slot-btn.selected { background: var(--green); color: #fff; border-color: var(--green); }
-  .slot-btn.taken { background: var(--gray-100); color: var(--gray-400); cursor: not-allowed; text-decoration: line-through; }
-  .selected-info { background: var(--green-light); border: 1px solid #9bc7c0; border-radius: 8px; padding: 12px 16px; font-size: 14px; color: var(--green); font-weight: 500; margin-top: 16px; display: none; }
-  .loading-slots { text-align: center; padding: 20px; font-size: 13px; color: var(--gray-400); display: none; }
-
-  /* Buttons */
   .btn-row { display: flex; gap: 12px; justify-content: flex-end; margin-top: 28px; }
   .btn { padding: 11px 28px; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.15s; border: 1px solid transparent; }
   .btn-secondary { background: #fff; border-color: var(--gray-200); color: var(--gray-700); }
   .btn-secondary:hover { border-color: var(--gray-700); }
   .btn-primary { background: var(--green); color: #fff; }
-  .btn-primary:hover { background: var(--green-dark); }
+  .btn-primary:hover:not(:disabled) { background: var(--green-dark); }
   .btn-primary:disabled { background: var(--gray-200); color: var(--gray-400); cursor: not-allowed; }
-
-  /* Success */
   .success-screen { text-align: center; padding: 60px 24px; }
   .success-icon { width: 64px; height: 64px; background: var(--green-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 28px; color: var(--green); }
   .success-screen h2 { font-family: 'DM Serif Display', serif; font-size: 24px; font-weight: 400; margin-bottom: 12px; color: var(--green); }
@@ -117,38 +75,23 @@
   .summary-box div:last-child { border-bottom: none; }
   .summary-box span:first-child { color: var(--gray-400); }
   .summary-box span:last-child { font-weight: 500; }
-
-  .progress-bar { height: 3px; background: rgba(255,255,255,0.2); }
-  .progress-fill { height: 100%; background: var(--gold); transition: width 0.3s ease; }
   .error-msg { font-size: 12px; color: var(--red); margin-top: 6px; display: none; }
-
   @media (max-width: 520px) {
     .prog-list { grid-template-columns: 1fr; }
     .slots-grid { grid-template-columns: repeat(3, 1fr); }
-    header h1 { font-size: 16px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <div class="logo-placeholder">UMF<br>Iași</div>
-  <div>
-    <h1>UMF „Grigore T. Popa" Iași</h1>
-    <p>Formular online · Acces public</p>
-  </div>
-</header>
-
 <div class="progress-bar">
-  <div class="progress-fill" id="progressFill" style="width:25%"></div>
+  <div class="progress-fill" id="progressFill" style="width:50%"></div>
 </div>
 
 <div class="steps">
-  <button class="step-btn active" id="stepBtn0"><span class="step-num">1</span>Satisfacție <span style="font-size:10px; opacity:0.6; margin-left:4px;">· anonim</span></button>
+  <button class="step-btn active" id="stepBtn0"><span class="step-num">1</span>Satisfacție</button>
   <div class="steps-divider"></div>
   <button class="step-btn" id="stepBtn1"><span class="step-num">2</span>Inserție prof.</button>
-  <button class="step-btn" id="stepBtn2"><span class="step-num">3</span>GDPR</button>
-  <button class="step-btn" id="stepBtn3"><span class="step-num">4</span>Programare</button>
 </div>
 
 <div class="container">
@@ -159,15 +102,12 @@
       <span style="font-size:18px;">🔒</span>
       <span>Acest chestionar este <strong>anonim</strong>. Nu se colectează date personale în această secțiune.</span>
     </div>
+    <iframe src='https://outlook.office.com/book/Programareeliberaredocumente@umfis.onmicrosoft.com/?ismsaljsauthenabled' width='100%' height='100%' scrolling='yes' style='border:0'></iframe>
     <h2 class="section-title">Chestionar de satisfacție a parcursului educațional</h2>
     <p class="section-desc">Acest chestionar cuprinde întrebări care se referă la parcursul educațional din cadrul UMF „Grigore T. Popa" Iași. Formularul se completează prin bifarea cifrei corespunzătoare răspunsului ales. Toate câmpurile sunt obligatorii.</p>
 
-    <!-- Q1: Program -->
     <div class="card">
-      <div class="q-header">
-        <span class="q-num">1</span>
-        <span class="q-label">Am absolvit programul de studii <span style="color:var(--red)">*</span></span>
-      </div>
+      <div class="q-header"><span class="q-num">1</span><span class="q-label">Am absolvit programul de studii <span style="color:var(--red)">*</span></span></div>
       <div class="prog-list" id="pgList">
         <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Medicină"> Medicină</label>
         <label class="prog-opt" onclick="selectProg(this)"><input type="radio" name="program" value="Medicină Dentară"> Medicină Dentară</label>
@@ -193,7 +133,6 @@
       <div class="error-msg" id="err_program">Selectați programul de studii</div>
     </div>
 
-    <!-- Q2 -->
     <div class="card">
       <div class="q-header"><span class="q-num">2</span><span class="q-label">Cadrele didactice dau dovadă de profesionalism și competență în cadrul disciplinelor pe care le predau <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq2">
@@ -204,7 +143,6 @@
       </div>
     </div>
 
-    <!-- Q3 -->
     <div class="card">
       <div class="q-header"><span class="q-num">3</span><span class="q-label">Consider că informațiile prezentate în cadrul cursurilor îmi sunt folositoare pentru dezvoltarea profesională <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq3">
@@ -214,7 +152,6 @@
       </div>
     </div>
 
-    <!-- Q4 -->
     <div class="card">
       <div class="q-header"><span class="q-num">4</span><span class="q-label">De cele mai multe ori ponderea orelor destinate părții aplicative din totalul orelor alocate disciplinelor este <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq4">
@@ -224,7 +161,6 @@
       </div>
     </div>
 
-    <!-- Q5 -->
     <div class="card">
       <div class="q-header"><span class="q-num">5</span><span class="q-label">Dotarea sălilor de curs corespunde necesităților predării <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq5">
@@ -234,7 +170,6 @@
       </div>
     </div>
 
-    <!-- Q6 -->
     <div class="card">
       <div class="q-header"><span class="q-num">6</span><span class="q-label">Dotarea laboratoarelor corespunde necesităților predării <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq6">
@@ -244,7 +179,6 @@
       </div>
     </div>
 
-    <!-- Q7 -->
     <div class="card">
       <div class="q-header"><span class="q-num">7</span><span class="q-label">Disponibilitatea cadrelor didactice / conducător de doctorat (consultații, îndrumare) este în general <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq7">
@@ -254,7 +188,6 @@
       </div>
     </div>
 
-    <!-- Q8 -->
     <div class="card">
       <div class="q-header"><span class="q-num">8</span><span class="q-label">Evaluarea cunoștințelor în cadrul disciplinelor a fost de cele mai multe ori <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq8">
@@ -264,7 +197,6 @@
       </div>
     </div>
 
-    <!-- Q9 -->
     <div class="card">
       <div class="q-header"><span class="q-num">9</span><span class="q-label">În relația cu cadrele didactice m-am simțit respectat <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq9">
@@ -276,7 +208,6 @@
       </div>
     </div>
 
-    <!-- Q10 -->
     <div class="card">
       <div class="q-header"><span class="q-num">10</span><span class="q-label">Atitudinea personalului administrativ (secretariat) față de student este <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq10">
@@ -287,7 +218,6 @@
       </div>
     </div>
 
-    <!-- Q11 -->
     <div class="card">
       <div class="q-header"><span class="q-num">11</span><span class="q-label">Atitudinea personalului de la Biblioteca universității față de student este <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq11">
@@ -298,7 +228,6 @@
       </div>
     </div>
 
-    <!-- Q12 -->
     <div class="card">
       <div class="q-header"><span class="q-num">12</span><span class="q-label">Atitudinea personalului de la Facilități studenți (Cămine, Cantină) față de student este <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq12">
@@ -309,7 +238,6 @@
       </div>
     </div>
 
-    <!-- Q13 -->
     <div class="card">
       <div class="q-header"><span class="q-num">13</span><span class="q-label">Atitudinea personalului de la SCOP al universității față de student este <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq13">
@@ -320,7 +248,6 @@
       </div>
     </div>
 
-    <!-- Q14 -->
     <div class="card">
       <div class="q-header"><span class="q-num">14</span><span class="q-label">Rețeaua de intranet (mail profesional, conexiune) a universității este <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq14">
@@ -330,7 +257,6 @@
       </div>
     </div>
 
-    <!-- Q15 -->
     <div class="card">
       <div class="q-header"><span class="q-num">15</span><span class="q-label">În cazul deciziilor care îi vizează în mod direct, reprezentanții studenților sunt consultați <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="sq15">
@@ -342,7 +268,6 @@
       </div>
     </div>
 
-    <!-- Q16 -->
     <div class="card">
       <div class="q-header"><span class="q-num">16</span><span class="q-label">Propuneri pentru optimizarea procesului educațional</span></div>
       <textarea id="propuneri" placeholder="Scrieți aici propunerile dumneavoastră..."></textarea>
@@ -359,27 +284,25 @@
     <h2 class="section-title">Chestionar de inserție profesională</h2>
     <p class="section-desc">Acest chestionar cuprinde întrebări care se referă la etapa prezentă din cariera dumneavoastră, precum și planurile de viitor în carieră. Toate câmpurile sunt obligatorii.</p>
 
-    <!-- IP Q1: Facultate / Specializare / Promotie -->
     <div class="card">
       <div class="q-header"><span class="q-num">1</span><span class="q-label">Date despre studii <span style="color:var(--red)">*</span></span></div>
       <div class="field">
         <label>Facultatea absolvită <span class="req">*</span></label>
-        <input type="text" id="ip_facultate" placeholder="ex. Facultatea de Medicină">
+        <input type="text" id="ip_facultate" placeholder="ex. Facultatea de Medicină" oninput="checkIP()">
         <div class="error-msg" id="err_ip_facultate">Câmp obligatoriu</div>
       </div>
       <div class="field">
         <label>Specializarea <span class="req">*</span></label>
-        <input type="text" id="ip_specializare" placeholder="ex. Medicină Generală">
+        <input type="text" id="ip_specializare" placeholder="ex. Medicină Generală" oninput="checkIP()">
         <div class="error-msg" id="err_ip_specializare">Câmp obligatoriu</div>
       </div>
       <div class="field">
         <label>Promoția <span class="req">*</span></label>
-        <input type="text" id="ip_promotie" placeholder="ex. 2023">
+        <input type="text" id="ip_promotie" placeholder="ex. 2023" oninput="checkIP()">
         <div class="error-msg" id="err_ip_promotie">Câmp obligatoriu</div>
       </div>
     </div>
 
-    <!-- IP Q2: Domeniu licentiat -->
     <div class="card">
       <div class="q-header"><span class="q-num">2</span><span class="q-label">După absolvirea facultății, sunteți licențiat(ă) în domeniul <span style="color:var(--red)">*</span></span></div>
       <div class="prog-list" id="ip_domeniu_list">
@@ -406,7 +329,6 @@
       <div class="error-msg" id="err_ip_domeniu">Selectați domeniul</div>
     </div>
 
-    <!-- IP Q3: Angajator -->
     <div class="card">
       <div class="q-header"><span class="q-num">3</span><span class="q-label">În momentul de față, sunteți angajat(ă) în cadrul unui <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="ip_angajator_group">
@@ -425,7 +347,6 @@
       <div class="error-msg" id="err_ip_angajator">Selectați o opțiune</div>
     </div>
 
-    <!-- IP Q4: Post -->
     <div class="card">
       <div class="q-header"><span class="q-num">4</span><span class="q-label">Postul pe care sunteți angajat(ă) în prezent este cel de <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="ip_post_group">
@@ -448,12 +369,11 @@
       <div class="error-msg" id="err_ip_post">Selectați o opțiune</div>
     </div>
 
-    <!-- IP Q5: Alumni -->
     <div class="card">
-      <div class="q-header"><span class="q-num">5</span><span class="q-label">Vă doriți ca după absolvire să deveniți membru(ă) al/a comunității Alumni a UMF „Grigore T. Popa" din Iași, în scopul accesului la informații referitoare la alumni, manifestări științifice, programe de educație postuniversitară etc.? <span style="color:var(--red)">*</span></span></div>
+      <div class="q-header"><span class="q-num">5</span><span class="q-label">Vă doriți ca după absolvire să deveniți membru(ă) al/a comunității Alumni a UMF „Grigore T. Popa" din Iași? <span style="color:var(--red)">*</span></span></div>
       <div class="scale-options" id="ip_alumni_group">
         <label class="scale-opt" onclick="selectIPAlumni(this,'Da')"><input type="radio" name="ip_alumni"><span></span>
-          Da &nbsp;<a href="#" onclick="event.stopPropagation(); openLink('https://alumni.umfiasi.ro')" style="font-size:12px; color:var(--gold); text-decoration:underline;">↗ Accesați pagina Alumni</a>
+          Da &nbsp;<a href="#" onclick="event.stopPropagation(); window.open('https://alumni.umfiasi.ro','_blank')" style="font-size:12px; color:var(--gold); text-decoration:underline;">↗ Accesați pagina Alumni</a>
         </label>
         <label class="scale-opt" onclick="selectIPAlumni(this,'Nu')"><input type="radio" name="ip_alumni"><span></span>Nu</label>
       </div>
@@ -462,113 +382,52 @@
 
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="goTo(0)">← Înapoi</button>
-      <button class="btn btn-primary" onclick="nextSectionIP()">Continuă →</button>
-    </div>
-  </div>
-
-  <!-- SECTIUNEA 3: GDPR -->
-  <div class="section" id="sec2">
-    <h2 class="section-title">Protecția datelor (GDPR)</h2>
-    <p class="section-desc">Vă rugăm să citiți și să acceptați termenii de prelucrare a datelor personale.</p>
-    <div class="card">
-      <div class="gdpr-box">
-        <h4>Informare privind prelucrarea datelor cu caracter personal</h4>
-        <p>În conformitate cu Regulamentul (UE) 2016/679 (GDPR), vă informăm că datele dumneavoastră cu caracter personal sunt prelucrate de UMF „Grigore T. Popa" Iași, cu sediul în Str. Universității nr. 16, Iași, în calitate de operator.</p><br>
-        <p><strong>Scopul prelucrării:</strong> Datele colectate prin acest formular sunt utilizate exclusiv pentru gestionarea solicitărilor dumneavoastră și îmbunătățirea serviciilor oferite.</p><br>
-        <p><strong>Datele prelucrate:</strong> Nume, prenume, adresă de email, număr de telefon, categoria beneficiarului, scopul solicitării.</p><br>
-        <p><strong>Temeiul juridic:</strong> Consimțământul dumneavoastră explicit, exprimat prin bifarea căsuței de acord.</p><br>
-        <p><strong>Durata stocării:</strong> Datele vor fi stocate pe o perioadă de maxim 3 ani de la data colectării, după care vor fi șterse în mod securizat.</p><br>
-        <p><strong>Drepturile dumneavoastră:</strong> Aveți dreptul de acces, rectificare, ștergere, restricționare a prelucrării, portabilitate și opoziție. Pentru exercitarea acestor drepturi, contactați-ne la adresa DPO a universității.</p><br>
-        <p><strong>Transferuri:</strong> Datele nu sunt transferate către terți sau în afara UE.</p>
-      </div>
-      <label class="check-agree" id="gdprCheck1" onclick="toggleCheck(this, 'gdpr1')">
-        <input type="checkbox" id="gdpr1">
-        <span>Am citit și sunt de acord cu prelucrarea datelor mele cu caracter personal în scopurile descrise mai sus. <span style="color:var(--red)">*</span></span>
-      </label>
-      <label class="check-agree" id="gdprCheck2" onclick="toggleCheck(this, 'gdpr2')">
-        <input type="checkbox" id="gdpr2">
-        <span>Sunt de acord să fiu contactat/ă în legătură cu solicitarea mea prin email sau telefon. <span style="font-size:12px;color:var(--gray-400)">(opțional)</span></span>
-      </label>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goTo(1)">← Înapoi</button>
-      <button class="btn btn-primary" id="btnGdprNext" onclick="nextGdpr()" disabled>Continuă →</button>
-    </div>
-  </div>
-
-  <!-- SECTIUNEA 4: Programare -->
-  <div class="section" id="sec3">
-    <h2 class="section-title">Programare eliberare documente</h2>
-    <p class="section-desc">Alegeți data și ora dorită. Interval disponibil: 11:30 – 14:30, sloturi de 15 minute.</p>
-    <div class="card">
-      <div class="cal-nav">
-        <button onclick="prevMonth()">&#8249;</button>
-        <span class="cal-month" id="calMonth"></span>
-        <button onclick="nextMonth()">&#8250;</button>
-      </div>
-      <div class="cal-grid" id="calGrid"></div>
-      <div id="loadingSlots" class="loading-slots">Se încarcă sloturile disponibile...</div>
-      <div id="slotsSection" style="display:none">
-        <div class="slots-title" id="slotsTitle"></div>
-        <div class="slots-grid" id="slotsGrid"></div>
-      </div>
-      <div class="selected-info" id="selectedInfo"></div>
-    </div>
-    <div class="btn-row">
-      <button class="btn btn-secondary" onclick="goTo(2)">← Înapoi</button>
-      <button class="btn btn-primary" id="btnSubmit" onclick="submitForm()" disabled>Trimite formularul</button>
+      <button class="btn btn-primary" id="btnSave" onclick="nextSectionIP()" disabled>Salvează</button>
     </div>
   </div>
 
   <!-- SUCCESS -->
   <div class="section" id="secSuccess">
     <div class="success-screen">
-      <div class="success-icon">&#10003;</div>
-      <h2>Formular trimis cu succes!</h2>
-      <p>Vă mulțumim. Datele au fost înregistrate și veți fi contactat/ă în curând.</p>
+      <div class="success-icon">✓</div>
+      <h2>Chestionarul a fost trimis cu succes!</h2>
+      <p>Vă mulțumim pentru completarea chestionarului de satisfacție și inserție profesională.</p>
+      <p style="margin-top:15px;">Pentru finalizarea procesului este necesar să completați și formularul de programare și acord GDPR.</p>
       <div class="summary-box" id="summaryBox"></div>
+      <div style="margin-top:30px;">
+        <a href="FORMULAR_2.html" class="btn btn-primary">Continuă către Formularul 2 →</a>
+      </div>
     </div>
   </div>
 
 </div>
 
 <script>
-  var URL_GET_SLOTURI = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/961816dd63744a19abb1d43b8d0b448e/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=hED2BfUx3cZAuDfwJtG40fH6aSLLNH9r8FWUADFeKF0';
   var URL_POST_FORMULAR = 'https://defaulte5f125baef3045d6b42ec2c9df1c01.70.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/6d715b5c8d914ac7ac80d5ef08cb23fd/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=-O_lQBZSr5MBoOCK0_VmqhfENVhAcneMhirBTJ14rIQ';
 
   var currentSection = 0;
   var scaleAnswers = {};
-  var formData = {
-    program: '',
-    scaleAnswers: {},
-    propuneri: '',
-    nume: '', email: '', telefon: '',
-    categorie: '', scop: '', gdpr1: false, gdpr2: false,
-    DataProgramare: null, OraProgramare: null
-  };
+  var formData = { program: '', scaleAnswers: {}, propuneri: '' };
 
-  var calYear, calMonth;
-  var today = new Date(); today.setHours(0,0,0,0);
-  var months = ['Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
-
-  function init() {
-    calYear = today.getFullYear();
-    calMonth = today.getMonth();
-    renderCal();
-  }
+  var ipAngajatorVal = '';
+  var ipPostVal = '';
+  var ipAlumniVal = '';
+  var ipDomeniuVal = '';
 
   function goTo(n) {
     document.getElementById('sec' + currentSection).classList.remove('active');
     currentSection = n;
-    document.getElementById('sec' + n).classList.add('active');
+    var secId = n === 'Success' ? 'secSuccess' : 'sec' + n;
+    document.getElementById(secId).classList.add('active');
     var btns = document.querySelectorAll('.step-btn');
-    for (var i = 0; i < 4; i++) {
-      btns[i].classList.remove('active');
-      if (i < n) btns[i].classList.add('done');
-      else btns[i].classList.remove('done');
+    for (var i = 0; i < 2; i++) {
+      btns[i].classList.remove('active', 'done');
+      if (typeof n === 'number') {
+        if (i < n) btns[i].classList.add('done');
+        else if (i === n) btns[i].classList.add('active');
+      }
     }
-    btns[n].classList.add('active');
-    document.getElementById('progressFill').style.width = ((n + 1) * 25) + '%';
+    document.getElementById('progressFill').style.width = (n === 'Success' ? 100 : (n + 1) * 50) + '%';
     window.scrollTo(0, 0);
   }
 
@@ -583,22 +442,11 @@
     scaleAnswers[groupId] = val;
   }
 
-  function selectRadio(label) {
-    var name = label.querySelector('input').name;
-    document.querySelectorAll('input[name="' + name + '"]').forEach(function(inp) {
-      inp.closest('label').classList.remove('selected');
-    });
-    label.classList.add('selected');
-  }
-
-  var ipAngajatorVal = '';
-  var ipPostVal = '';
-  var ipAlumniVal = '';
-
   function selectProgIn(listId, fieldId, label, val) {
     document.getElementById(listId).querySelectorAll('.prog-opt').forEach(function(l) { l.classList.remove('selected'); });
     label.classList.add('selected');
-    window[fieldId + '_val'] = val;
+    ipDomeniuVal = val;
+    checkIP();
   }
 
   function selectIPAngajator(label, val) {
@@ -607,6 +455,7 @@
     ipAngajatorVal = val;
     var needDetail = label.classList.contains('ip-has-detail');
     document.getElementById('ip_angajator_detail_box').style.display = needDetail ? 'block' : 'none';
+    checkIP();
   }
 
   function selectIPPost(label, val) {
@@ -615,49 +464,23 @@
     ipPostVal = val;
     var needDetail = label.classList.contains('ip-has-detail');
     document.getElementById('ip_post_detail_box').style.display = needDetail ? 'block' : 'none';
+    checkIP();
   }
 
   function selectIPAlumni(label, val) {
     document.getElementById('ip_alumni_group').querySelectorAll('.scale-opt').forEach(function(l) { l.classList.remove('selected'); });
     label.classList.add('selected');
     ipAlumniVal = val;
+    checkIP();
   }
 
-  function nextSectionIP() {
+  // Live check — activates Save button when all required fields are filled
+  function checkIP() {
     var facultate = document.getElementById('ip_facultate').value.trim();
     var specializare = document.getElementById('ip_specializare').value.trim();
     var promotie = document.getElementById('ip_promotie').value.trim();
-    var domeniu = (document.querySelector('input[name="ip_domeniu"]:checked') || {}).value || '';
-
-    document.getElementById('err_ip_facultate').style.display = facultate ? 'none' : 'block';
-    document.getElementById('err_ip_specializare').style.display = specializare ? 'none' : 'block';
-    document.getElementById('err_ip_promotie').style.display = promotie ? 'none' : 'block';
-    document.getElementById('err_ip_domeniu').style.display = domeniu ? 'none' : 'block';
-    document.getElementById('err_ip_angajator').style.display = ipAngajatorVal ? 'none' : 'block';
-    document.getElementById('err_ip_post').style.display = ipPostVal ? 'none' : 'block';
-    document.getElementById('err_ip_alumni').style.display = ipAlumniVal ? 'none' : 'block';
-
-    if (!facultate || !specializare || !promotie || !domeniu || !ipAngajatorVal || !ipPostVal || !ipAlumniVal) return;
-
-    formData.ip_facultate = facultate;
-    formData.ip_specializare = specializare;
-    formData.ip_promotie = promotie;
-    formData.ip_domeniu = domeniu;
-    formData.ip_angajator = ipAngajatorVal;
-    formData.ip_angajator_detail = document.getElementById('ip_angajator_detail').value;
-    formData.ip_post = ipPostVal;
-    formData.ip_post_detail = document.getElementById('ip_post_detail').value;
-    formData.ip_alumni = ipAlumniVal;
-    goTo(2);
-  }
-
-  function toggleCheck(label, id) {
-    var cb = document.getElementById(id);
-    cb.checked = !cb.checked;
-    label.classList.toggle('selected', cb.checked);
-    if (id === 'gdpr1') {
-      document.getElementById('btnGdprNext').disabled = !cb.checked;
-    }
+    var ok = facultate && specializare && promotie && ipDomeniuVal && ipAngajatorVal && ipPostVal && ipAlumniVal;
+    document.getElementById('btnSave').disabled = !ok;
   }
 
   function nextSection0() {
@@ -680,160 +503,35 @@
     goTo(1);
   }
 
-  function nextGdpr() {
-    if (!document.getElementById('gdpr1').checked) return;
-    formData.gdpr1 = true;
-    formData.gdpr2 = document.getElementById('gdpr2').checked;
-    goTo(3);
+  function nextSectionIP() {
+    var facultate = document.getElementById('ip_facultate').value.trim();
+    var specializare = document.getElementById('ip_specializare').value.trim();
+    var promotie = document.getElementById('ip_promotie').value.trim();
+
+    document.getElementById('err_ip_facultate').style.display = facultate ? 'none' : 'block';
+    document.getElementById('err_ip_specializare').style.display = specializare ? 'none' : 'block';
+    document.getElementById('err_ip_promotie').style.display = promotie ? 'none' : 'block';
+    document.getElementById('err_ip_domeniu').style.display = ipDomeniuVal ? 'none' : 'block';
+    document.getElementById('err_ip_angajator').style.display = ipAngajatorVal ? 'none' : 'block';
+    document.getElementById('err_ip_post').style.display = ipPostVal ? 'none' : 'block';
+    document.getElementById('err_ip_alumni').style.display = ipAlumniVal ? 'none' : 'block';
+
+    if (!facultate || !specializare || !promotie || !ipDomeniuVal || !ipAngajatorVal || !ipPostVal || !ipAlumniVal) return;
+
+    formData.ip_facultate = facultate;
+    formData.ip_specializare = specializare;
+    formData.ip_promotie = promotie;
+    formData.ip_domeniu = ipDomeniuVal;
+    formData.ip_angajator = ipAngajatorVal;
+    formData.ip_angajator_detail = document.getElementById('ip_angajator_detail').value;
+    formData.ip_post = ipPostVal;
+    formData.ip_post_detail = document.getElementById('ip_post_detail').value;
+    formData.ip_alumni = ipAlumniVal;
+    submitFirstForm();
   }
 
-  function renderCal() {
-    document.getElementById('calMonth').textContent = months[calMonth] + ' ' + calYear;
-    var grid = document.getElementById('calGrid');
-    grid.innerHTML = '';
-    ['Lu','Ma','Mi','Jo','Vi','Sâ','Du'].forEach(function(d) {
-      var h = document.createElement('div');
-      h.className = 'cal-head'; h.textContent = d;
-      grid.appendChild(h);
-    });
-    var first = new Date(calYear, calMonth, 1);
-    var startDay = (first.getDay() + 6) % 7;
-    for (var e = 0; e < startDay; e++) {
-      var empty = document.createElement('div');
-      empty.className = 'cal-day empty';
-      grid.appendChild(empty);
-    }
-    var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-    for (var day = 1; day <= daysInMonth; day++) {
-      var d = new Date(calYear, calMonth, day);
-      var isWeekend = d.getDay() === 0 || d.getDay() === 6;
-      var isPast = d < today;
-      var cell = document.createElement('div');
-      cell.className = 'cal-day' + (isPast || isWeekend ? ' past' : '') + (d.getTime() === today.getTime() ? ' today' : '');
-      cell.textContent = day;
-      if (!isPast && !isWeekend) {
-        (function(dd, cc) { cc.onclick = function() { selectDay(dd, cc); }; })(d, cell);
-      }
-      grid.appendChild(cell);
-    }
-  }
-
-  function selectDay(date, cell) {
-    document.querySelectorAll('.cal-day').forEach(function(c) { c.classList.remove('selected'); });
-    cell.classList.add('selected');
-    formData.DataProgramare = date;
-    formData.OraProgramare = null;
-    document.getElementById('selectedInfo').style.display = 'none';
-    document.getElementById('btnSubmit').disabled = true;
-    loadSloturi(date);
-  }
-
-  function loadSloturi(date) {
-    var section = document.getElementById('slotsSection');
-    var loading = document.getElementById('loadingSlots');
-    section.style.display = 'none';
-    loading.style.display = 'block';
-
-    var dateStr = date.getFullYear() + '-' +
-      String(date.getMonth() + 1).padStart(2, '0') + '-' +
-      String(date.getDate()).padStart(2, '0');
-
-    fetch(URL_GET_SLOTURI, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ data: dateStr })
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(data) {
-      loading.style.display = 'none';
-      var sloturi = [];
-      if (data && Array.isArray(data.sloturi)) sloturi = data.sloturi;
-      else if (data && typeof data.sloturi === 'string') { try { sloturi = JSON.parse(data.sloturi); } catch(e) { sloturi = []; } }
-      else if (Array.isArray(data)) sloturi = data;
-
-      var ocupate = [];
-      sloturi.forEach(function(item) {
-        if (item && item.OraProgramare) {
-          var dt = new Date(item.OraProgramare);
-          var dataConv = dt.toLocaleDateString('en-CA', { timeZone: 'Europe/Bucharest' });
-          var oraConv = dt.toLocaleTimeString('ro-RO', { timeZone: 'Europe/Bucharest', hour: '2-digit', minute: '2-digit', hour12: false });
-          if (dataConv === dateStr) ocupate.push(oraConv);
-        }
-      });
-      ocupate = ocupate.filter(function(v, i, s) { return s.indexOf(v) === i; });
-      renderSlots(date, ocupate);
-    })
-    .catch(function() {
-      loading.style.display = 'none';
-      renderSlots(date, []);
-    });
-  }
-
-  function renderSlots(date, ocupate) {
-    var section = document.getElementById('slotsSection');
-    var title = document.getElementById('slotsTitle');
-    var grid = document.getElementById('slotsGrid');
-    title.textContent = 'Ore disponibile — ' + date.getDate() + ' ' + months[date.getMonth()];
-    grid.innerHTML = '';
-
-    var slots = [];
-    var h = 11, min = 30;
-    while (h < 14 || (h === 14 && min <= 30)) {
-      slots.push((h < 10 ? '0' : '') + h + ':' + (min === 0 ? '00' : min));
-      min += 15;
-      if (min >= 60) { h++; min = 0; }
-    }
-
-    slots.forEach(function(slot) {
-      var taken = ocupate.indexOf(slot) > -1;
-      var btn = document.createElement('button');
-      btn.className = 'slot-btn' + (taken ? ' taken' : '');
-      btn.textContent = slot;
-      if (!taken) { btn.onclick = function() { selectSlot(slot, btn, date); }; }
-      grid.appendChild(btn);
-    });
-    section.style.display = 'block';
-  }
-
-  function selectSlot(slot, btn, date) {
-    document.querySelectorAll('.slot-btn').forEach(function(b) { b.classList.remove('selected'); });
-    btn.classList.add('selected');
-    formData.OraProgramare = slot;
-    var info = document.getElementById('selectedInfo');
-    info.textContent = 'Programare selectată: ' + date.getDate() + ' ' + months[date.getMonth()] + ' ' + date.getFullYear() + ', ora ' + slot;
-    info.style.display = 'block';
-    document.getElementById('btnSubmit').disabled = false;
-  }
-
-  function prevMonth() {
-    calMonth--; if (calMonth < 0) { calMonth = 11; calYear--; }
-    renderCal();
-    document.getElementById('slotsSection').style.display = 'none';
-    document.getElementById('loadingSlots').style.display = 'none';
-  }
-
-  function nextMonth() {
-    calMonth++; if (calMonth > 11) { calMonth = 0; calYear++; }
-    renderCal();
-    document.getElementById('slotsSection').style.display = 'none';
-    document.getElementById('loadingSlots').style.display = 'none';
-  }
-
-  function submitForm() {
-    if (!formData.DataProgramare || !formData.OraProgramare) return;
-    document.getElementById('btnSubmit').disabled = true;
-    document.getElementById('btnSubmit').textContent = 'Se trimite...';
-
-    var dateStr = formData.DataProgramare.getFullYear() + '-' +
-      String(formData.DataProgramare.getMonth() + 1).padStart(2, '0') + '-' +
-      String(formData.DataProgramare.getDate()).padStart(2, '0');
-
+  function submitFirstForm() {
     var payload = {
-      nume: formData.nume,
-      email: formData.email,
-      telefon: formData.telefon,
-      categorie: formData.categorie,
-      scop: formData.scop,
       program: formData.program,
       raspunsuri: formData.scaleAnswers,
       propuneri: formData.propuneri,
@@ -845,36 +543,27 @@
       ip_angajator_detail: formData.ip_angajator_detail,
       ip_post: formData.ip_post,
       ip_post_detail: formData.ip_post_detail,
-      ip_alumni: formData.ip_alumni,
-      DataProgramare: dateStr,
-      OraProgramare: formData.OraProgramare,
-      gdpr: formData.gdpr1
+      ip_alumni: formData.ip_alumni
     };
-
     fetch(URL_POST_FORMULAR, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
-    .then(function() { showSuccess(dateStr); })
-    .catch(function() { showSuccess(dateStr); });
+    .then(function() { showSuccessForm1(); })
+    .catch(function() { showSuccessForm1(); });
   }
 
-  function showSuccess(dateStr) {
+  function showSuccessForm1() {
     var summary = document.getElementById('summaryBox');
     summary.innerHTML =
-      '<div><span>Nume</span><span>' + formData.nume + '</span></div>' +
-      '<div><span>Email</span><span>' + formData.email + '</span></div>' +
       '<div><span>Program absolvit</span><span>' + formData.program + '</span></div>' +
-      '<div><span>Data programării</span><span>' + formData.DataProgramare.getDate() + ' ' + months[formData.DataProgramare.getMonth()] + ' ' + formData.DataProgramare.getFullYear() + '</span></div>' +
-      '<div><span>Ora</span><span>' + formData.OraProgramare + '</span></div>';
-    document.getElementById('sec3').classList.remove('active');
-    document.getElementById('secSuccess').classList.add('active');
-    document.getElementById('progressFill').style.width = '100%';
-    window.scrollTo(0, 0);
+      '<div><span>Facultate</span><span>' + formData.ip_facultate + '</span></div>' +
+      '<div><span>Specializare</span><span>' + formData.ip_specializare + '</span></div>' +
+      '<div><span>Promoție</span><span>' + formData.ip_promotie + '</span></div>';
+    currentSection = 1;
+    goTo('Success');
   }
-
-  init();
 </script>
 </body>
 </html>
